@@ -9,7 +9,8 @@ import {
 import {
   SkyActionButtonFixture,
   SkyAlertFixture,
-  SkyAvatarFixture
+  SkyAvatarFixture,
+  SkyListViewChecklistFixture
 } from './fixture-types';
 
 function getEl(
@@ -55,6 +56,13 @@ export class SkyTestComponentSelector {
     skyTestId: string
   ): SkyActionButtonFixture {
     return new SkyActionButtonFixture(getEl(fixture, skyTestId, 'sky-action-button'));
+  }
+
+  public static selectListViewChecklist(
+    fixture: ComponentFixture<any>,
+    skyTestId: string
+  ): SkyListViewChecklistFixture {
+    return new SkyListViewChecklistFixture(getEl(fixture, skyTestId, 'sky-list-view-checklist'));
   }
 
 }
