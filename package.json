@@ -1,0 +1,30 @@
+{
+  "name": "@blackbaud/skyux-lib-testing",
+  "version": "1.0.0-alpha.0",
+  "description": "Provides methods for interacting with SKY UX components during Karma tests",
+  "main": "bundles/bundle.umd.js",
+  "module": "index.ts",
+  "engines": {
+    "node": ">=6.11.1"
+  },
+  "scripts": {
+    "skyux": "skyux",
+    "test": "skyux test && skyux e2e && skyux build && npm run build",
+    "build": "skyux build-public-library",
+    "start": "skyux serve"
+  },
+  "keywords": [],
+  "author": "Blackbaud",
+  "license": "ISC",
+  "peerDdependencies": {
+    "@blackbaud/skyux": "^2.3.0"
+  },
+  "devDependencies": {
+    "@blackbaud/skyux": "2.3.0",
+    "@blackbaud/skyux-builder": "1.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/blackbaud/skyux-lib-testing"
+  }
+}
