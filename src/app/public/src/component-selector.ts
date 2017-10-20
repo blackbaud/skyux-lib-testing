@@ -10,6 +10,7 @@ import {
   SkyActionButtonFixture,
   SkyAlertFixture,
   SkyAvatarFixture,
+  SkyCardFixture,
   SkyListViewChecklistFixture
 } from './fixture-types';
 
@@ -37,6 +38,13 @@ function getEl(
 
 export class SkyTestComponentSelector {
 
+  public static selectActionButton(
+    fixture: ComponentFixture<any>,
+    skyTestId: string
+  ): SkyActionButtonFixture {
+    return new SkyActionButtonFixture(getEl(fixture, skyTestId, 'sky-action-button'));
+  }
+
   public static selectAlert(
     fixture: ComponentFixture<any>,
     skyTestId: string
@@ -51,11 +59,11 @@ export class SkyTestComponentSelector {
     return new SkyAvatarFixture(getEl(fixture, skyTestId, 'sky-avatar'));
   }
 
-  public static selectActionButton(
+  public static selectCard(
     fixture: ComponentFixture<any>,
     skyTestId: string
-  ): SkyActionButtonFixture {
-    return new SkyActionButtonFixture(getEl(fixture, skyTestId, 'sky-action-button'));
+  ): SkyCardFixture {
+    return new SkyCardFixture(getEl(fixture, skyTestId, 'sky-card'));
   }
 
   public static selectListViewChecklist(
