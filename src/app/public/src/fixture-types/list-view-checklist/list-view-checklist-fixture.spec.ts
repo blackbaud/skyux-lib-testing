@@ -85,12 +85,16 @@ describe('Action button fixture', () => {
       'my-list-view-checklist'
     );
 
+    listViewChecklist.selectItem(1);
+
+    fixture.detectChanges();
+
     const item = listViewChecklist.getItem(1);
 
     expect(item).toEqual({
       label: 'Banana',
       description: 'Ben eats bananas',
-      selected: false
+      selected: true
     });
 
     expect(() => listViewChecklist.getItem(100)).toThrowError('No item exists at index 100.');
