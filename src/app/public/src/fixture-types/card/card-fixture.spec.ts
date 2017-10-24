@@ -13,7 +13,7 @@ import {
 
 import {
   SkyTestComponentSelector
-} from '../component-selector';
+} from '../../component-selector';
 //#endregion Imports
 
 //#region Test component

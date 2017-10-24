@@ -15,7 +15,7 @@ import {
 
 import {
   SkyTestComponentSelector
-} from '../component-selector';
+} from '../../component-selector';
 //#endregion Imports
 
 //#region Test component
@@ -85,17 +85,28 @@ describe('Action button fixture', () => {
       'my-list-view-checklist'
     );
 
+    listViewChecklist.selectItem(1);
+
+    fixture.detectChanges();
+
     const item = listViewChecklist.getItem(1);
 
     expect(item).toEqual({
       label: 'Banana',
-      description: 'Ben eats bananas'
+      description: 'Ben eats bananas',
+      selected: true
     });
 
     expect(() => listViewChecklist.getItem(100)).toThrowError('No item exists at index 100.');
   });
 
   it('should allow an item to be selected by index', () => {
+    const expectedSelectedItems = [
+      { id: '2', column1: 202, column2: 'Banana', column3: 'Ben eats bananas' },
+      { id: '4', column1: 404, column2: 'Grape', column3: 'George eats grapes' },
+      { id: '5', column1: 505, column2: 'Banana', column3: 'Becky eats bananas' }
+    ];
+
     const fixture = TestBed.createComponent(
       TestComponent
     );
@@ -113,13 +124,46 @@ describe('Action button fixture', () => {
 
     fixture.detectChanges();
 
-    expect(fixture.componentInstance.selectedItems).toEqual([
-      { id: '2', column1: 202, column2: 'Banana', column3: 'Ben eats bananas' },
-      { id: '4', column1: 404, column2: 'Grape', column3: 'George eats grapes' },
-      { id: '5', column1: 505, column2: 'Banana', column3: 'Becky eats bananas' }
-    ]);
+    expect(fixture.componentInstance.selectedItems).toEqual(expectedSelectedItems);
+
+    // Ensure the item doesn't get de-selected by selecting it twice.
+    listViewChecklist.selectItem(4);
+
+    expect(fixture.componentInstance.selectedItems).toEqual(expectedSelectedItems);
 
     expect(() => listViewChecklist.selectItem(100)).toThrowError('No item exists at index 100.');
+  });
+
+  it('should allow an item to be deselected by index', () => {
+    const fixture = TestBed.createComponent(
+      TestComponent
+    );
+
+    fixture.detectChanges();
+
+    const listViewChecklist = SkyTestComponentSelector.selectListViewChecklist(
+      fixture,
+      'my-list-view-checklist'
+    );
+
+    listViewChecklist.selectItem(1);
+
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance.selectedItems).toEqual([
+      { id: '2', column1: 202, column2: 'Banana', column3: 'Ben eats bananas' }
+    ]);
+
+    listViewChecklist.deselectItem(1);
+
+    expect(fixture.componentInstance.selectedItems).toEqual([]);
+
+    // Ensure the item doesn't get selected by deselecting it twice.
+    listViewChecklist.deselectItem(1);
+
+    expect(fixture.componentInstance.selectedItems).toEqual([]);
+
+    expect(() => listViewChecklist.deselectItem(100)).toThrowError('No item exists at index 100.');
   });
 
 });

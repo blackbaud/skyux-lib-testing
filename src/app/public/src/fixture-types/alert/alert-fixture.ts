@@ -8,7 +8,7 @@ import {
 
 import {
   SkyTestFixtureUtilities
-} from './utilities';
+} from '../utilities';
 
 export class SkyAlertFixture {
 
