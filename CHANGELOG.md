@@ -1,3 +1,3 @@
-# 1.0.0-alpha.0 (2017-10-19)
+# 1.0.0-beta.1 (2017-10-26)
 
-- Initial commit.
+- Fixed spelling of `ActionButtonFixture.detailsText` property.
