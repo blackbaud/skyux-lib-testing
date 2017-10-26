@@ -97,17 +97,22 @@ describe('Action button fixture', () => {
       'test-card'
     );
 
-    card.select();
-    expect(fixture.componentInstance.selected).toBe(true);
+    const validateSelected = (selected: boolean) => {
+      expect(card.selected).toBe(selected);
+      expect(fixture.componentInstance.selected).toBe(selected);
+    };
 
     card.select();
-    expect(fixture.componentInstance.selected).toBe(true);
+    validateSelected(true);
+
+    card.select();
+    validateSelected(true);
 
     card.deselect();
-    expect(fixture.componentInstance.selected).toBe(false);
+    validateSelected(false);
 
     card.deselect();
-    expect(fixture.componentInstance.selected).toBe(false);
+    validateSelected(false);
   });
 
   it('should throw an error when selecting a card that is not selectable', () => {
