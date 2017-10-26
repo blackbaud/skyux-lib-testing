@@ -18,7 +18,7 @@ export class SkyActionButtonFixture {
     );
   }
 
-  public get detialsText(): string {
+  public get detailsText(): string {
     return SkyTestFixtureUtilities.getText(
       this.debugEl.query(By.css('sky-action-button-details'))
     );
