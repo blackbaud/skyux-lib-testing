@@ -64,7 +64,7 @@ describe('Action button fixture', () => {
     );
 
     expect(actionButton.headerText).toBe('Build a new list');
-    expect(actionButton.detialsText).toBe('Start from scratch and fine-tune with filters');
+    expect(actionButton.detailsText).toBe('Start from scratch and fine-tune with filters');
     expect(actionButton.iconType).toBe('filter');
   });
 
