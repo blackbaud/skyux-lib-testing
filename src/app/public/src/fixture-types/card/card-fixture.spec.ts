@@ -97,12 +97,16 @@ describe('Action button fixture', () => {
       'test-card'
     );
 
-    card.toggleSelected();
-
+    card.select();
     expect(fixture.componentInstance.selected).toBe(true);
 
-    card.toggleSelected();
+    card.select();
+    expect(fixture.componentInstance.selected).toBe(true);
 
+    card.deselect();
+    expect(fixture.componentInstance.selected).toBe(false);
+
+    card.deselect();
     expect(fixture.componentInstance.selected).toBe(false);
   });
 
@@ -120,7 +124,7 @@ describe('Action button fixture', () => {
       'test-card'
     );
 
-    expect(() => card.toggleSelected()).toThrowError('The card is not selectable.');
+    expect(() => card.select()).toThrowError('The card is not selectable.');
   });
 
 });

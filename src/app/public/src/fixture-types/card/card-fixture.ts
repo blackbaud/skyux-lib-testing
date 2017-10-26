@@ -28,18 +28,38 @@ export class SkyCardFixture {
     return !!this.debugEl.query(By.css('.sky-card-check'));
   }
 
+  public get selected(): boolean {
+    if (this.selectable) {
+      return this.getCheckInputEl().nativeElement.checked;
+    }
+
+    throw new Error('The card is not selectable.');
+  }
+
   constructor(private debugEl: DebugElement) { }
 
-  public toggleSelected() {
-    if (this.selectable) {
-      let labelEl = this.debugEl.query(
-        By.css('.sky-card-check label.sky-checkbox-wrapper')
-      );
-
-      labelEl.nativeElement.click();
-    } else {
-      throw new Error('The card is not selectable.');
+  public select() {
+    if (!this.selected) {
+      this.clickCheckLabelEl();
     }
+  }
+
+  public deselect() {
+    if (this.selected) {
+      this.clickCheckLabelEl();
+    }
+  }
+
+  private clickCheckLabelEl() {
+    this.debugEl.query(
+      By.css('.sky-card-check label.sky-checkbox-wrapper')
+    ).nativeElement.click();
+  }
+
+  private getCheckInputEl() {
+    return this.debugEl.query(
+      By.css('.sky-card-check .sky-checkbox-wrapper input')
+    );
   }
 
 }
