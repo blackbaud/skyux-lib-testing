@@ -12,7 +12,8 @@ import {
   SkyAvatarFixture,
   SkyCardFixture,
   SkyErrorFixture,
-  SkyListViewChecklistFixture
+  SkyListViewChecklistFixture,
+  SkySearchFixture
 } from './fixture-types';
 
 function getEl(
@@ -37,7 +38,7 @@ function getEl(
   return skyEl;
 }
 
-export class SkyTestComponentSelector {
+export abstract class SkyTestComponentSelector {
 
   public static selectActionButton(
     fixture: ComponentFixture<any>,
@@ -79,6 +80,13 @@ export class SkyTestComponentSelector {
     skyTestId: string
   ): SkyListViewChecklistFixture {
     return new SkyListViewChecklistFixture(getEl(fixture, skyTestId, 'sky-list-view-checklist'));
+  }
+
+  public static selectSearch(
+    fixture: ComponentFixture<any>,
+    skyTestId: string
+  ): SkySearchFixture {
+    return new SkySearchFixture(getEl(fixture, skyTestId, 'sky-search'));
   }
 
 }

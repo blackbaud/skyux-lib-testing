@@ -4,3 +4,4 @@ export * from './action-button';
 export * from './card';
 export * from './error';
 export * from './list-view-checklist';
+export * from './search';
