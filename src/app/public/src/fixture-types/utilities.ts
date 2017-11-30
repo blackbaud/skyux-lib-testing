@@ -1,4 +1,4 @@
-export class SkyTestFixtureUtilities {
+export abstract class SkyTestFixtureUtilities {
 
   public static isVisible(el: any): boolean {
     const nativeEl = this.nativeEl(el);
@@ -18,6 +18,18 @@ export class SkyTestFixtureUtilities {
     }
 
     return undefined;
+  }
+
+  public static setInputValue(el: any, value: any) {
+    let inputEvent = document.createEvent('Event');
+    inputEvent.initEvent('input', false, false);
+
+    let changeEvent = document.createEvent('Event');
+    changeEvent.initEvent('change', false, false);
+
+    el.value = value;
+
+    el.dispatchEvent(inputEvent);
   }
 
   public static getBackgroundImageUrl(el: any): string {
