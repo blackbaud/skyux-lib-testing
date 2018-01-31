@@ -1,3 +1,7 @@
+# 1.0.0-beta.4 (2018-01-31)
+
+- Added label and page summary component fixtures.
+
 # 1.0.0-beta.3 (2017-11-30)
 
 - Added search component fixture.
