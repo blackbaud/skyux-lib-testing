@@ -42,7 +42,7 @@ class TestComponent {
 }
 //#endregion Test component
 
-describe('Action button fixture', () => {
+describe('Alert fixture', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
