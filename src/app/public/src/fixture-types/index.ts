@@ -5,4 +5,5 @@ export * from './card';
 export * from './error';
 export * from './label';
 export * from './list-view-checklist';
+export * from './page-summary';
 export * from './search';
