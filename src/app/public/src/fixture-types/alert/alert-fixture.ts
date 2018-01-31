@@ -29,21 +29,21 @@ export class SkyAlertFixture {
   }
 
   public get alertType(): string {
-    const nativeEl = this.getAlertEl().nativeElement;
+    const clsList = this.getAlertEl().nativeElement.classList;
 
-    if (nativeEl.classList.contains('sky-alert-danger')) {
+    if (clsList.contains('sky-alert-danger')) {
       return 'danger';
     }
 
-    if (nativeEl.classList.contains('sky-alert-info')) {
+    if (clsList.contains('sky-alert-info')) {
       return 'info';
     }
 
-    if (nativeEl.classList.contains('sky-alert-success')) {
+    if (clsList.contains('sky-alert-success')) {
       return 'success';
     }
 
-    if (nativeEl.classList.contains('sky-alert-warning')) {
+    if (clsList.contains('sky-alert-warning')) {
       return 'warning';
     }
 

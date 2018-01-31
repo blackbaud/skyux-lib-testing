@@ -12,6 +12,7 @@ import {
   SkyAvatarFixture,
   SkyCardFixture,
   SkyErrorFixture,
+  SkyLabelFixture,
   SkyListViewChecklistFixture,
   SkySearchFixture
 } from './fixture-types';
@@ -73,6 +74,13 @@ export abstract class SkyTestComponentSelector {
     skyTestId: string
   ): SkyErrorFixture {
     return new SkyErrorFixture(getEl(fixture, skyTestId, 'sky-error'));
+  }
+
+  public static selectLabel(
+    fixture: ComponentFixture<any>,
+    skyTestId: string
+  ): SkyLabelFixture {
+    return new SkyLabelFixture(getEl(fixture, skyTestId, 'sky-label'));
   }
 
   public static selectListViewChecklist(
