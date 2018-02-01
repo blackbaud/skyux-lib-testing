@@ -1,3 +1,8 @@
+# 1.0.0-beta.5 (2018-02-01)
+
+- Added list grid view component fixture.
+- Added JSDoc comments to public members.
+
 # 1.0.0-beta.4 (2018-01-31)
 
 - Added label and page summary component fixtures.
