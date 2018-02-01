@@ -60,7 +60,7 @@ class TestComponent {
 }
 //#endregion Test component
 
-describe('Action button fixture', () => {
+describe('List view checklist fixture', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
