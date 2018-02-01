@@ -5,5 +5,6 @@ export * from './card';
 export * from './error';
 export * from './label';
 export * from './list-view-checklist';
+export * from './list-view-grid';
 export * from './page-summary';
 export * from './search';

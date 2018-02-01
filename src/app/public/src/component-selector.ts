@@ -14,6 +14,7 @@ import {
   SkyErrorFixture,
   SkyLabelFixture,
   SkyListViewChecklistFixture,
+  SkyListViewGridFixture,
   SkyPageSummaryFixture,
   SkySearchFixture
 } from './fixture-types';
@@ -89,6 +90,13 @@ export abstract class SkyTestComponentSelector {
     skyTestId: string
   ): SkyListViewChecklistFixture {
     return new SkyListViewChecklistFixture(getEl(fixture, skyTestId, 'sky-list-view-checklist'));
+  }
+
+  public static selectListViewGrid(
+    fixture: ComponentFixture<any>,
+    skyTestId: string
+  ): SkyListViewGridFixture {
+    return new SkyListViewGridFixture(getEl(fixture, skyTestId, 'sky-list-view-grid'));
   }
 
   public static selectPageSummary(
