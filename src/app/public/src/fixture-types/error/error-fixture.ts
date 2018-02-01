@@ -8,8 +8,14 @@ import {
 
 const SKY_ERROR_IMAGE_CLS_REGEX = /^sky-error-(\w*)-image$/;
 
+/**
+ * Allows interaction with a SKY UX error component.
+ */
 export class SkyErrorFixture {
 
+  /**
+   * The error's current type.
+   */
   public get errorType(): string {
     const imageEl = this.debugEl.query(By.css('.sky-error-image-container > div'));
 

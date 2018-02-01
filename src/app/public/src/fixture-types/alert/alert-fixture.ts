@@ -10,24 +10,39 @@ import {
   SkyTestFixtureUtilities
 } from '../utilities';
 
+/**
+ * Allows interaction with a SKY UX alert component.
+ */
 export class SkyAlertFixture {
 
+  /**
+   * The alert's current text.
+   */
   public get text(): string {
-    return this.debugEl.nativeElement.innerText.trim();
+    return SkyTestFixtureUtilities.getText(this.debugEl);
   }
 
+  /**
+   * A flag indicating whether the alert can be closed.
+   */
   public get closeable(): boolean {
     const closeBtnEl = this.getCloseBtnEl();
 
     return SkyTestFixtureUtilities.isVisible(closeBtnEl);
   }
 
+  /**
+   * Returns a flag indicating whether the alert is closed.
+   */
   public get closed(): boolean {
     return !SkyTestFixtureUtilities.isVisible(
       this.getAlertEl()
     );
   }
 
+  /**
+   * The alert's current type.
+   */
   public get alertType(): string {
     const clsList = this.getAlertEl().nativeElement.classList;
 
@@ -52,6 +67,9 @@ export class SkyAlertFixture {
 
   constructor(private debugEl: DebugElement) { }
 
+  /**
+   * Closes the alert.  If the alert is not closeable, an error is thrown.
+   */
   public close() {
     if (this.closeable) {
       const closeBtnEl = this.getCloseBtnEl();

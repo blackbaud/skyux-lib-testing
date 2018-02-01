@@ -2,6 +2,9 @@ import {
   DebugElement
 } from '@angular/core';
 
+/**
+ * Properties of a list view grid cell.
+ */
 export interface SkyListViewGridFixtureCell {
   /**
    * The cell's DebugElement.  This is useful for validating HTML inside the cell

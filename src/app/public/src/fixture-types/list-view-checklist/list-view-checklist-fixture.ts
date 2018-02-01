@@ -16,10 +16,17 @@ import {
 
 const CHECKBOX_SELECTOR = By.css('.sky-checkbox-wrapper > input');
 
+/**
+ * Allows interaction with a SKY UX list view checklist component.
+ */
 export class SkyListViewChecklistFixture {
 
   constructor(private debugEl: DebugElement) { }
 
+  /**
+   * Gets an item at the specified index.
+   * @param index The item's index.
+   */
   public getItem(index: number): SkyListViewChecklistItem {
     const itemEl = this.getItemEl(index);
 
@@ -34,6 +41,10 @@ export class SkyListViewChecklistFixture {
     };
   }
 
+  /**
+   * Selects the item at the specified index.
+   * @param index The item's index.
+   */
   public selectItem(index: number) {
     const itemEl = this.getItemEl(index);
 
@@ -44,6 +55,10 @@ export class SkyListViewChecklistFixture {
     }
   }
 
+  /**
+   * Deselects the item at the specified index.
+   * @param index The item's index.
+   */
   public deselectItem(index: number) {
     const itemEl = this.getItemEl(index);
 

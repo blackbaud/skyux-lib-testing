@@ -10,8 +10,14 @@ import {
   SkyTestFixtureUtilities
 } from '../utilities';
 
+/**
+ * Allows interaction with a SKY UX label component.
+ */
 export class SkyLabelFixture {
 
+  /**
+   * The label's current type.
+   */
   public get labelType(): string {
     const clsList = this.getLabelEl().nativeElement.classList;
 
@@ -34,6 +40,9 @@ export class SkyLabelFixture {
     return undefined;
   }
 
+  /**
+   * The label's current text.
+   */
   public get text(): string {
     const labelEl = this.getLabelEl();
 

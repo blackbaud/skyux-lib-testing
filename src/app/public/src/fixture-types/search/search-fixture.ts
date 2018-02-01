@@ -10,18 +10,32 @@ import {
   SkyTestFixtureUtilities
 } from '../utilities';
 
+/**
+ * Allows interaction with a SKY UX search component.
+ */
 export class SkySearchFixture {
 
+  /**
+   * Gets the search's current text.
+   */
   public get searchText(): string {
     return this.getInputEl().nativeElement.value;
   }
 
+  /**
+   * Gets the search's current placeholder text.
+   */
   public get placeholderText(): string {
     return this.getInputEl().nativeElement.placeholder;
   }
 
   constructor(private debugEl: DebugElement) { }
 
+  /**
+   * Applies the specified search text, invoking the search.
+   * @param searchText The search text to apply.  If none is specified, the search's
+   * current search text will be applied.
+   */
   public apply(searchText?: string) {
     if (searchText) {
       SkyTestFixtureUtilities.setInputValue(this.getInputEl().nativeElement, searchText);
@@ -32,6 +46,10 @@ export class SkySearchFixture {
     btnEl.triggerEventHandler('click', {});
   }
 
+  /**
+   * Clears the current search text. If there is no search text or the search text is
+   * not currently applied, an error is thrown.
+   */
   public clear() {
     const clearEl = this.debugEl.query(By.css('.sky-input-group-clear'));
 
