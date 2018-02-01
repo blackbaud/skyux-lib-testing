@@ -10,8 +10,14 @@ import {
   SkyTestFixtureUtilities
 } from '../utilities';
 
+/**
+ * Allows interaction with a SKY UX avatar component.
+ */
 export class SkyAvatarFixture {
 
+  /**
+   * The initials displayed when no image URL is specified.
+   */
   public get initials(): string {
     const initialsEl = this.debugEl.query(By.css('.sky-avatar-initials'));
 
@@ -24,6 +30,9 @@ export class SkyAvatarFixture {
     return undefined;
   }
 
+  /**
+   * The avatar's current image URL.
+   */
   public get imageUrl(): string {
     const imageEl = this.debugEl.query(By.css('.sky-avatar-image'));
 
