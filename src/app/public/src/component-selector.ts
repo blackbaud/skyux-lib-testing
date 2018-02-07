@@ -45,14 +45,14 @@ function getEl(
  * Provides methods for selecting SKY UX elements so their properties can be accessed
  * for testing.
  */
-export abstract class SkyTestComponentSelector {
+export namespace SkyTestComponentSelector {
 
   /**
    * Selects an action button component.
    * @param fixture The ComponentFixture where the SKY UX component resides.
    * @param skyTestId The value of the `data-sky-id` property specified on the SKY UX component.
    */
-  public static selectActionButton(
+  export function selectActionButton(
     fixture: ComponentFixture<any>,
     skyTestId: string
   ): SkyActionButtonFixture {
@@ -64,7 +64,7 @@ export abstract class SkyTestComponentSelector {
    * @param fixture The ComponentFixture where the SKY UX component resides.
    * @param skyTestId The value of the `data-sky-id` property specified on the SKY UX component.
    */
-  public static selectAlert(
+  export function selectAlert(
     fixture: ComponentFixture<any>,
     skyTestId: string
   ): SkyAlertFixture {
@@ -76,7 +76,7 @@ export abstract class SkyTestComponentSelector {
    * @param fixture The ComponentFixture where the SKY UX component resides.
    * @param skyTestId The value of the `data-sky-id` property specified on the SKY UX component.
    */
-  public static selectAvatar(
+  export function selectAvatar(
     fixture: ComponentFixture<any>,
     skyTestId: string
   ): SkyAvatarFixture {
@@ -88,7 +88,7 @@ export abstract class SkyTestComponentSelector {
    * @param fixture The ComponentFixture where the SKY UX component resides.
    * @param skyTestId The value of the `data-sky-id` property specified on the SKY UX component.
    */
-  public static selectCard(
+  export function selectCard(
     fixture: ComponentFixture<any>,
     skyTestId: string
   ): SkyCardFixture {
@@ -100,7 +100,7 @@ export abstract class SkyTestComponentSelector {
    * @param fixture The ComponentFixture where the SKY UX component resides.
    * @param skyTestId The value of the `data-sky-id` property specified on the SKY UX component.
    */
-  public static selectError(
+  export function selectError(
     fixture: ComponentFixture<any>,
     skyTestId: string
   ): SkyErrorFixture {
@@ -112,7 +112,7 @@ export abstract class SkyTestComponentSelector {
    * @param fixture The ComponentFixture where the SKY UX component resides.
    * @param skyTestId The value of the `data-sky-id` property specified on the SKY UX component.
    */
-  public static selectLabel(
+  export function selectLabel(
     fixture: ComponentFixture<any>,
     skyTestId: string
   ): SkyLabelFixture {
@@ -124,7 +124,7 @@ export abstract class SkyTestComponentSelector {
    * @param fixture The ComponentFixture where the SKY UX component resides.
    * @param skyTestId The value of the `data-sky-id` property specified on the SKY UX component.
    */
-  public static selectListViewChecklist(
+  export function selectListViewChecklist(
     fixture: ComponentFixture<any>,
     skyTestId: string
   ): SkyListViewChecklistFixture {
@@ -136,7 +136,7 @@ export abstract class SkyTestComponentSelector {
    * @param fixture The ComponentFixture where the SKY UX component resides.
    * @param skyTestId The value of the `data-sky-id` property specified on the SKY UX component.
    */
-  public static selectListViewGrid(
+  export function selectListViewGrid(
     fixture: ComponentFixture<any>,
     skyTestId: string
   ): SkyListViewGridFixture {
@@ -148,7 +148,7 @@ export abstract class SkyTestComponentSelector {
    * @param fixture The ComponentFixture where the SKY UX component resides.
    * @param skyTestId The value of the `data-sky-id` property specified on the SKY UX component.
    */
-  public static selectPageSummary(
+  export function selectPageSummary(
     fixture: ComponentFixture<any>,
     skyTestId: string
   ): SkyPageSummaryFixture {
@@ -160,7 +160,7 @@ export abstract class SkyTestComponentSelector {
    * @param fixture The ComponentFixture where the SKY UX component resides.
    * @param skyTestId The value of the `data-sky-id` property specified on the SKY UX component.
    */
-  public static selectSearch(
+  export function selectSearch(
     fixture: ComponentFixture<any>,
     skyTestId: string
   ): SkySearchFixture {
