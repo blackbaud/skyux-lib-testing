@@ -134,7 +134,7 @@ If you're running these tests in a SKY UX SPA, you can use the `a11y` config fro
 }
 ```
 
-***some.spec.ts**
+**some.spec.ts**
 ```
 import {
   SkyAppConfig
