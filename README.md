@@ -12,6 +12,8 @@ npm install @blackbaud/skyux-lib-testing --save-dev --save-exact
 
 ## Usage
 
+### SKY UX component fixtures
+
 - In your component's HTML, add a `data-sky-id` attribute to SKY UX components you want to examine in your tests.  Example:
 
 ```
@@ -68,4 +70,39 @@ fixture.detectChanges();
 expect(fixture.componentInstance.someProperty).toBe(
   'value after clicking action button'
 );
+```
+
+### Accessibility testing
+
+```
+import { expect } from '@blackbaud/skyux-lib-testing';
+
+describe('...', () => {
+
+  // Using Angular's async method:
+  it('should pass accessibility', async(() => {
+    expect(document).toPassA11y();
+  }));
+
+  // Using Jasmine's done method:
+  it('should pass accessibility', (done) => {
+    expect(document).toPassA11y(done);
+  });
+
+  // Implementing a custom callback:
+  it('should pass accessibility', async(() => {
+    expect(document).toPassA11y(() => {
+      // Do something else after a11y checks have run.
+    });
+  }));
+
+  // Overwriting default config:
+  it('should pass accessibility', async(() => {
+    expect(document).toPassA11y(() => {}, {
+      rules: {
+        'duplicate-id': { enabled: false }
+      }
+    });
+  }));
+});
 ```
