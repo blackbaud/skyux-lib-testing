@@ -159,9 +159,14 @@ const matchers: jasmine.CustomMatcherFactories = {
             windowRef.fail(err.message);
           });
 
-        // Since the returned result is always `true`, this matcher cannot be
-        // paired with a `.not.` operator. In this particular case, there will more
-        // than likely not be a requirement to check if something isn't accessible.
+        // Asynchronous matchers are currently unsupported, but
+        // the method above works to fail the specific test in the
+        // callback manually, if checks do not pass.
+        // ---
+        // A side effect of this technique is the matcher cannot be
+        // paired with a `.not.toBeA11y` operator (since the returned
+        // result is always `true`). For this particular matcher,
+        // checking if an element is not accessibile may be irrelevent.
         return result;
       }
     };

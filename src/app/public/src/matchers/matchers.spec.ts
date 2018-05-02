@@ -156,7 +156,7 @@ describe('Jasmine matchers', () => {
       it('should allow SkyAppConfig override', async(
         inject([SkyAppConfig], (config: SkyAppConfig) => {
           const element = createPassingElement();
-          expect(element).toPassA11y(() => {}, config);
+          expect(element).toPassA11y(() => {}, config.skyux.a11y);
         }))
       );
     });
