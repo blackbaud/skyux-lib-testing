@@ -1,5 +1,3 @@
-import { SkyMatchResult } from './match-result';
-
 import {
   SkyA11yAnalyzer,
   SkyA11yAnalyzerConfig
@@ -10,7 +8,7 @@ const windowRef: any = window;
 const matchers: jasmine.CustomMatcherFactories = {
   toBeVisible() {
     return {
-      compare(el: Element): SkyMatchResult {
+      compare(el: Element): jasmine.CustomMatcherResult {
         const result = {
           pass: false,
           message: ''
@@ -29,7 +27,7 @@ const matchers: jasmine.CustomMatcherFactories = {
 
   toHaveText() {
     return {
-      compare(el: any, expectedText: string, trimWhitespace = true): SkyMatchResult {
+      compare(el: any, expectedText: string, trimWhitespace = true): jasmine.CustomMatcherResult {
         const result = {
           pass: false,
           message: ''
@@ -55,7 +53,7 @@ const matchers: jasmine.CustomMatcherFactories = {
 
   toHaveCssClass() {
     return {
-      compare(el: any, expectedClassName: string): SkyMatchResult {
+      compare(el: any, expectedClassName: string): jasmine.CustomMatcherResult {
         const result = {
           pass: false,
           message: ''
@@ -78,7 +76,7 @@ const matchers: jasmine.CustomMatcherFactories = {
 
   toHaveStyle() {
     return {
-      compare(el: any, expectedStyles: any): SkyMatchResult {
+      compare(el: any, expectedStyles: any): jasmine.CustomMatcherResult {
         const message: string[] = [];
 
         let hasFailure = false;
@@ -119,7 +117,7 @@ const matchers: jasmine.CustomMatcherFactories = {
 
   toExist() {
     return {
-      compare(el: any): SkyMatchResult {
+      compare(el: any): jasmine.CustomMatcherResult {
         const result = {
           pass: false,
           message: ''
@@ -140,23 +138,15 @@ const matchers: jasmine.CustomMatcherFactories = {
     return {
       compare(
         element: any,
-        callback?: () => void,
+        callback: () => void = () => {},
         config?: SkyA11yAnalyzerConfig
-      ): SkyMatchResult {
-
-        const result: any = {
-          message: '',
-          pass: true
-        };
+      ): jasmine.CustomMatcherResult {
 
         SkyA11yAnalyzer.run(element, config)
-          .then(() => {
-            if (callback) {
-              callback();
-            }
-          })
+          .then(() => callback())
           .catch((err) => {
             windowRef.fail(err.message);
+            callback();
           });
 
         // Asynchronous matchers are currently unsupported, but
@@ -167,7 +157,10 @@ const matchers: jasmine.CustomMatcherFactories = {
         // paired with a `.not.toBeA11y` operator (since the returned
         // result is always `true`). For this particular matcher,
         // checking if an element is not accessibile may be irrelevent.
-        return result;
+        return {
+          message: '',
+          pass: true
+        };
       }
     };
   }
