@@ -6,6 +6,37 @@ import {
 const windowRef: any = window;
 
 const matchers: jasmine.CustomMatcherFactories = {
+  toBeAccessible() {
+    return {
+      compare(
+        element: any,
+        callback: () => void = () => {},
+        config?: SkyA11yAnalyzerConfig
+      ): jasmine.CustomMatcherResult {
+
+        SkyA11yAnalyzer.run(element, config)
+          .then(() => callback())
+          .catch((err) => {
+            windowRef.fail(err.message);
+            callback();
+          });
+
+        // Asynchronous matchers are currently unsupported, but
+        // the method above works to fail the specific test in the
+        // callback manually, if checks do not pass.
+        // ---
+        // A side effect of this technique is the matcher cannot be
+        // paired with a `.not.toBeAccessible` operator (since the returned
+        // result is always `true`). For this particular matcher,
+        // checking if an element is not accessibile may be irrelevent.
+        return {
+          message: '',
+          pass: true
+        };
+      }
+    };
+  },
+
   toBeVisible() {
     return {
       compare(el: Element): jasmine.CustomMatcherResult {
@@ -25,26 +56,19 @@ const matchers: jasmine.CustomMatcherFactories = {
     };
   },
 
-  toHaveText() {
+  toExist() {
     return {
-      compare(el: any, expectedText: string, trimWhitespace = true): jasmine.CustomMatcherResult {
+      compare(el: any): jasmine.CustomMatcherResult {
         const result = {
           pass: false,
           message: ''
         };
 
-        let actualText = el.textContent;
-
-        if (trimWhitespace) {
-          actualText = actualText.trim();
-        }
-
-        result.pass = actualText === expectedText;
+        result.pass = !!el;
 
         result.message = result.pass ?
-          `Expected element's inner text not to be ${expectedText}` :
-          `Expected element's inner text to be: "${expectedText}"\n` +
-          `Actual element's inner text was: "${actualText}"`;
+          'Expected element not to exist' :
+          'Expected element to exist';
 
         return result;
       }
@@ -115,52 +139,28 @@ const matchers: jasmine.CustomMatcherFactories = {
     };
   },
 
-  toExist() {
+  toHaveText() {
     return {
-      compare(el: any): jasmine.CustomMatcherResult {
+      compare(el: any, expectedText: string, trimWhitespace = true): jasmine.CustomMatcherResult {
         const result = {
           pass: false,
           message: ''
         };
 
-        result.pass = !!el;
+        let actualText = el.textContent;
+
+        if (trimWhitespace) {
+          actualText = actualText.trim();
+        }
+
+        result.pass = actualText === expectedText;
 
         result.message = result.pass ?
-          'Expected element not to exist' :
-          'Expected element to exist';
+          `Expected element's inner text not to be ${expectedText}` :
+          `Expected element's inner text to be: "${expectedText}"\n` +
+          `Actual element's inner text was: "${actualText}"`;
 
         return result;
-      }
-    };
-  },
-
-  toPassA11y() {
-    return {
-      compare(
-        element: any,
-        callback: () => void = () => {},
-        config?: SkyA11yAnalyzerConfig
-      ): jasmine.CustomMatcherResult {
-
-        SkyA11yAnalyzer.run(element, config)
-          .then(() => callback())
-          .catch((err) => {
-            windowRef.fail(err.message);
-            callback();
-          });
-
-        // Asynchronous matchers are currently unsupported, but
-        // the method above works to fail the specific test in the
-        // callback manually, if checks do not pass.
-        // ---
-        // A side effect of this technique is the matcher cannot be
-        // paired with a `.not.toBeA11y` operator (since the returned
-        // result is always `true`). For this particular matcher,
-        // checking if an element is not accessibile may be irrelevent.
-        return {
-          message: '',
-          pass: true
-        };
       }
     };
   }

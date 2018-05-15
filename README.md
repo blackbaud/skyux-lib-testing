@@ -85,7 +85,7 @@ In your test, wrap the `expect` function around the element you wish to check fo
 
 ```
 it('should pass accessibility', async(() => {
-  expect(element).toPassA11y();
+  expect(element).toBeAccessible();
 }));
 ```
 
@@ -93,7 +93,7 @@ You may also use Jasmine's `done` callback if the `async` method is unavailable:
 
 ```
 it('should pass accessibility', (done) => {
-  expect(element).toPassA11y(done);
+  expect(element).toBeAccessible(done);
 });
 ```
 
@@ -101,7 +101,7 @@ You may utilize the callback above to execute code after the checks have run.
 
 ```
 it('should pass accessibility', async(() => {
-  expect(document).toPassA11y(() => {
+  expect(document).toBeAccessible(() => {
     // Do something else...
   });
 }));
@@ -111,7 +111,7 @@ Each expectation can be provided with a custom configuration. (Be aware that cus
 
 ```
 it('should pass accessibility', async(() => {
-  expect(element).toPassA11y(() => {}, {
+  expect(element).toBeAccessible(() => {}, {
     rules: {
       'color-contrast': { enabled: false }
     }
@@ -159,7 +159,7 @@ describe('...', () => {
 
   it('should pass accessibility', async(
     inject([SkyAppConfig], (appConfig: SkyAppConfig) => {
-      expect(element).toPassA11y(() => {}, config.skyux.a11y);
+      expect(element).toBeAccessible(() => {}, config.skyux.a11y);
     }))
   );
 });

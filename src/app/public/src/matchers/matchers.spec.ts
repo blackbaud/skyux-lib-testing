@@ -95,7 +95,7 @@ describe('Jasmine matchers', () => {
     expect(found).not.toExist();
   });
 
-  describe('toPassA11y', () => {
+  describe('toBeAccessible', () => {
     function createPassingElement(): any {
       const wrapper = document.createElement('div');
       const elem1 = document.createElement('div');
@@ -117,7 +117,7 @@ describe('Jasmine matchers', () => {
 
     it('should check accessibility', async(() => {
       const element = createPassingElement();
-      expect(element).toPassA11y();
+      expect(element).toBeAccessible();
     }));
 
     it('should fail if accessibility rules fail', async(() => {
@@ -130,7 +130,7 @@ describe('Jasmine matchers', () => {
       // This will result in a failure on a consumer unit test.
       // We're swallowing the error in order to double-check
       // that an accessibility error was indeed logged.
-      expect(element).toPassA11y(() => {
+      expect(element).toBeAccessible(() => {
         expect(failSpy).toHaveBeenCalled();
       });
     }));
@@ -146,7 +146,7 @@ describe('Jasmine matchers', () => {
 
       it('should allow configuration override', async(() => {
         const element = createFailingElement();
-        expect(element).toPassA11y(() => {}, {
+        expect(element).toBeAccessible(() => {}, {
           rules: {
             'duplicate-id': { enabled: false }
           }
@@ -156,7 +156,7 @@ describe('Jasmine matchers', () => {
       it('should allow SkyAppConfig override', async(
         inject([SkyAppConfig], (config: SkyAppConfig) => {
           const element = createPassingElement();
-          expect(element).toPassA11y(() => {}, config.skyux.a11y);
+          expect(element).toBeAccessible(() => {}, config.skyux.a11y);
         }))
       );
     });
