@@ -12,6 +12,7 @@ import {
 } from '@angular/core/testing';
 
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
 import {
   SkyListModule

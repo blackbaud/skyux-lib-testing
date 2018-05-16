@@ -12,6 +12,8 @@ npm install @blackbaud/skyux-lib-testing --save-dev --save-exact
 
 ## Usage
 
+### SKY UX component fixtures
+
 - In your component's HTML, add a `data-sky-id` attribute to SKY UX components you want to examine in your tests.  Example:
 
 ```
@@ -68,4 +70,97 @@ fixture.detectChanges();
 expect(fixture.componentInstance.someProperty).toBe(
   'value after clicking action button'
 );
+```
+
+### Accessibility testing
+
+In your component's `.spec.ts` file, add this code to the top of the file to import the extended Jasmine `expect` function:
+
+```
+import {
+  expect
+} from '@blackbaud/skyux-lib-testing';
+```
+In your test, wrap the `expect` function around the element you wish to check for accessibility rules. It's important to wrap your test in Angular's `async` method, since the accessibility checks are asynchronous.
+
+```
+it('should pass accessibility', async(() => {
+  expect(element).toBeAccessible();
+}));
+```
+
+You may also use Jasmine's `done` callback if the `async` method is unavailable:
+
+```
+it('should pass accessibility', (done) => {
+  expect(element).toBeAccessible(done);
+});
+```
+
+You may utilize the callback above to execute code after the checks have run.
+
+```
+it('should pass accessibility', async(() => {
+  expect(document).toBeAccessible(() => {
+    // Do something else...
+  });
+}));
+```
+
+Each expectation can be provided with a custom configuration. (Be aware that custom config _extends_ the default config, so is really only useful for disabling specific rules.)
+
+```
+it('should pass accessibility', async(() => {
+  expect(element).toBeAccessible(() => {}, {
+    rules: {
+      'color-contrast': { enabled: false }
+    }
+  });
+}));
+```
+
+If you're running these tests in a SKY UX SPA, you can use the `a11y` config from your skyuxconfig.json file:
+
+**skyuxconfig.json**
+```
+{
+  "a11y": {
+    "rules": {
+      "color-contrast": {
+        "enabled": false
+      }
+    }
+  }
+}
+```
+
+**some.spec.ts**
+```
+import {
+  SkyAppConfig
+} from '@blackbaud/skyux-builder/runtime';
+
+import {
+  SkyAppTestModule
+} from '@blackbaud/skyux-builder/runtime/testing/browser';
+
+import {
+  expect
+} from '@blackbaud/skyux-lib-testing';
+
+describe('...', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        SkyAppTestModule
+      ]
+    });
+  });
+
+  it('should pass accessibility', async(
+    inject([SkyAppConfig], (appConfig: SkyAppConfig) => {
+      expect(element).toBeAccessible(() => {}, config.skyux.a11y);
+    }))
+  );
+});
 ```
