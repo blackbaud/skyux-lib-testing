@@ -1,3 +1,8 @@
+# 1.0.0 (2018-05-17)
+
+- Added Jasmine matchers and accessibility analyzer. [#17](https://github.com/blackbaud/skyux-lib-testing/pull/17)
+- Refactored static classes to namespaces. [#16](https://github.com/blackbaud/skyux-lib-testing/pull/16)
+
 # 1.0.0-beta.5 (2018-02-01)
 
 - Added list grid view component fixture.
