@@ -28,7 +28,7 @@ const matchers: jasmine.CustomMatcherFactories = {
         // A side effect of this technique is the matcher cannot be
         // paired with a `.not.toBeAccessible` operator (since the returned
         // result is always `true`). For this particular matcher,
-        // checking if an element is not accessibile may be irrelevent.
+        // checking if an element is not accessible may be irrelevant.
         return {
           message: '',
           pass: true
