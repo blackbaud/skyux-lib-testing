@@ -7,7 +7,7 @@ export abstract class SkyA11yAnalyzer {
     rules: {
       'accesskeys': { enabled: true },
       'area-alt': { enabled: true },
-      'aria-allowed-attr': { enabled: true },
+      'aria-allowed-attr': { enabled: false }, // TEMP: this should be re-enabled when we upgrade to axe-core ^3.1.1
       'aria-required-attr': { enabled: true },
       'aria-required-children': { enabled: true },
       'aria-required-parent': { enabled: true },
