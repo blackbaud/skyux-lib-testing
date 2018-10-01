@@ -38,7 +38,7 @@ export class SkyActionButtonFixture {
    */
   public get iconType(): string {
     const classList = this.debugEl.query(
-      By.css('.sky-action-button-icon')
+      By.css('.fa.sky-icon')
     ).nativeElement.classList;
 
     for (let i = 0, n = classList.length; i < n; i++) {
