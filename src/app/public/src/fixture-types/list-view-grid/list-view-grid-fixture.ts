@@ -57,7 +57,7 @@ export class SkyListViewGridFixture {
    */
   public getHeader(columnIndex: number): SkyListViewGridFixtureHeader {
     const headerEls = this.debugEl.queryAll(By.css('th.sky-grid-heading > div'));
-    
+
     const headerEl = headerEls[columnIndex];
 
     if (!headerEl) {
