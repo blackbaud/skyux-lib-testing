@@ -1,3 +1,7 @@
+# 1.0.1 (2018-11-08)
+
+- Disabled `aria-allowed-attr` a11y rule. [#20](https://github.com/blackbaud/skyux-lib-testing/pull/20)
+
 # 1.0.0 (2018-05-17)
 
 - Added Jasmine matchers and accessibility analyzer. [#17](https://github.com/blackbaud/skyux-lib-testing/pull/17)
