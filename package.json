@@ -4,9 +4,6 @@
   "description": "Provides methods for interacting with SKY UX components during Karma tests",
   "main": "bundles/bundle.umd.js",
   "module": "index.ts",
-  "engines": {
-    "node": ">=6.11.1"
-  },
   "scripts": {
     "skyux": "skyux",
     "test": "skyux test && skyux e2e && skyux build && npm run build",
@@ -17,11 +14,11 @@
   "author": "Blackbaud",
   "license": "ISC",
   "peerDdependencies": {
-    "@blackbaud/skyux": "^2.12.0"
+    "@blackbaud/skyux": "^2.30.1"
   },
   "devDependencies": {
-    "@blackbaud/skyux": "2.12.1",
-    "@blackbaud/skyux-builder": "1.14.0"
+    "@blackbaud/skyux": "2.30.1",
+    "@blackbaud/skyux-builder": "1.29.0"
   },
   "repository": {
     "type": "git",
