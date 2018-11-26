@@ -56,7 +56,7 @@ export class SkyListViewGridFixture {
    * @param columnIndex The index of the column to which the header belongs.
    */
   public getHeader(columnIndex: number): SkyListViewGridFixtureHeader {
-    const headerEls = this.debugEl.queryAll(By.css('th.sky-grid-heading'));
+    const headerEls = this.debugEl.queryAll(By.css('th.sky-grid-heading > div'));
 
     const headerEl = headerEls[columnIndex];
 
