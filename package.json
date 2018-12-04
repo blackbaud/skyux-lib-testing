@@ -1,6 +1,6 @@
 {
   "name": "@blackbaud/skyux-lib-testing",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Provides methods for interacting with SKY UX components during Karma tests",
   "main": "bundles/bundle.umd.js",
   "module": "index.ts",

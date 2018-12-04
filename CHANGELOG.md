@@ -1,3 +1,7 @@
+# 1.1.0 (2018-12-04)
+
+- Added support for `@blackbaud/skyux@2.30.1`. [#25](https://github.com/blackbaud/skyux-lib-testing/pull/25) (Thanks [@Blackbaud-StacyCarlos](https://github.com/Blackbaud-StacyCarlos)!)
+
 # 1.0.1 (2018-11-08)
 
 - Disabled `aria-allowed-attr` a11y rule. [#20](https://github.com/blackbaud/skyux-lib-testing/pull/20)
