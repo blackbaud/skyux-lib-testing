@@ -51,6 +51,10 @@ export class SkyListViewGridFixture {
     };
   }
 
+  public getRowCount(): number {
+    return this.getRowEls().length;
+  }
+
   /**
    * Gets the header at the specified index.
    * @param columnIndex The index of the column to which the header belongs.
@@ -70,8 +74,12 @@ export class SkyListViewGridFixture {
     };
   }
 
+  private getRowEls(): DebugElement[] {
+    return this.debugEl.queryAll(By.css('.sky-grid-row'));
+  }
+
   private getRowEl(index: number) {
-    const rowEls = this.debugEl.queryAll(By.css('.sky-grid-row'));
+    const rowEls = this.getRowEls();
 
     const rowEl = rowEls[index];
 
