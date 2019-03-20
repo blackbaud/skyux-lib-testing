@@ -158,4 +158,7 @@ describe('List view grid fixture', () => {
     ).toThrowError('No column exists at index 100.');
   });
 
+  it('should count amount of headers', () => {
+    expect(listViewGrid.getHeaderCount()).toBe(3);
+  });
 });

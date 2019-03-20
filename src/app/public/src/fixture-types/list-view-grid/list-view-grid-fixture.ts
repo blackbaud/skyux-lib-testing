@@ -60,7 +60,7 @@ export class SkyListViewGridFixture {
    * @param columnIndex The index of the column to which the header belongs.
    */
   public getHeader(columnIndex: number): SkyListViewGridFixtureHeader {
-    const headerEls = this.debugEl.queryAll(By.css('th.sky-grid-heading > div'));
+    const headerEls = this.getHeaderEls();
 
     const headerEl = headerEls[columnIndex];
 
@@ -72,6 +72,10 @@ export class SkyListViewGridFixture {
       locked: headerEl.nativeElement.classList.contains('sky-grid-header-locked'),
       textContent: SkyTestFixtureUtilities.getText(headerEl)
     };
+  }
+
+  public getHeaderCount(): number {
+    return this.getHeaderEls().length;
   }
 
   private getRowEls(): DebugElement[] {
@@ -88,6 +92,10 @@ export class SkyListViewGridFixture {
     }
 
     return rowEl;
+  }
+
+  private getHeaderEls(): DebugElement[] {
+    return this.debugEl.queryAll(By.css('th.sky-grid-heading > div'));
   }
 
   private getCellEls(rowEl: DebugElement) {
