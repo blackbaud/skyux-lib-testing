@@ -21,7 +21,21 @@ import {
 import {
   SkyTestComponentSelector
 } from '../../component-selector';
+
+import {
+  SkyListViewGridFixture
+} from '.';
 //#endregion Imports
+
+const testItems = [
+  { id: '1', column1: 101, column2: 'Apple', column3: 'Anne eats apples'},
+  { id: '2', column1: 202, column2: 'Banana', column3: 'Ben eats bananas' },
+  { id: '3', column1: 303, column2: 'Pear', column3: 'Patty eats pears' },
+  { id: '4', column1: 404, column2: 'Grape', column3: 'George eats grapes' },
+  { id: '5', column1: 505, column2: 'Banana', column3: 'Becky eats bananas' },
+  { id: '6', column1: 606, column2: 'Lemon', column3: 'Larry eats lemons' },
+  { id: '7', column1: 707, column2: 'Strawberry', column3: 'Sally eats strawberries' }
+];
 
 //#region Test component
 @Component({
@@ -65,19 +79,12 @@ import {
   `
 })
 class TestComponent {
-  public items: Observable<Array<any>> = Observable.of([
-    { id: '1', column1: 101, column2: 'Apple', column3: 'Anne eats apples'},
-    { id: '2', column1: 202, column2: 'Banana', column3: 'Ben eats bananas' },
-    { id: '3', column1: 303, column2: 'Pear', column3: 'Patty eats pears' },
-    { id: '4', column1: 404, column2: 'Grape', column3: 'George eats grapes' },
-    { id: '5', column1: 505, column2: 'Banana', column3: 'Becky eats bananas' },
-    { id: '6', column1: 606, column2: 'Lemon', column3: 'Larry eats lemons' },
-    { id: '7', column1: 707, column2: 'Strawberry', column3: 'Sally eats strawberries' }
-  ]);
+  public items: Observable<Array<any>> = Observable.of(testItems);
 }
 //#endregion Test component
 
 describe('List view grid fixture', () => {
+  let listViewGrid: SkyListViewGridFixture;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -88,20 +95,16 @@ describe('List view grid fixture', () => {
         SkyListModule
       ]
     });
-  });
 
-  it('should allow a row to be retrieved by index', () => {
-    const fixture = TestBed.createComponent(
-      TestComponent
-    );
-
+    const fixture = TestBed.createComponent(TestComponent);
     fixture.detectChanges();
-
-    const listViewGrid = SkyTestComponentSelector.selectListViewGrid(
+    listViewGrid = SkyTestComponentSelector.selectListViewGrid(
       fixture,
       'my-list-view-grid'
     );
+  });
 
+  it('should allow a row to be retrieved by index', () => {
     const validateRow = (
       index: number,
       cell1Text: string,
@@ -130,18 +133,11 @@ describe('List view grid fixture', () => {
     ).toThrowError('No row exists at index 100.');
   });
 
+  it('should count amount of rows', () => {
+    expect(listViewGrid.getRowCount()).toBe(testItems.length);
+  });
+
   it('should allow a header to be retrieved by index', () => {
-    const fixture = TestBed.createComponent(
-      TestComponent
-    );
-
-    fixture.detectChanges();
-
-    const listViewGrid = SkyTestComponentSelector.selectListViewGrid(
-      fixture,
-      'my-list-view-grid'
-    );
-
     const validateHeader = (
       columnIndex: number,
       locked: boolean,
@@ -162,4 +158,7 @@ describe('List view grid fixture', () => {
     ).toThrowError('No column exists at index 100.');
   });
 
+  it('should count amount of headers', () => {
+    expect(listViewGrid.getHeaderCount()).toBe(3);
+  });
 });
