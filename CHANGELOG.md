@@ -1,3 +1,7 @@
+# 1.2.0 (2019-04-03)
+
+- Added methods to `SkyListViewGridFixture` that return the number of rows and headers created. [#27](https://github.com/blackbaud/skyux-lib-testing/pull/27)
+
 # 1.1.0 (2018-12-04)
 
 - Added support for `@blackbaud/skyux@2.30.1`. [#25](https://github.com/blackbaud/skyux-lib-testing/pull/25) (Thanks [@Blackbaud-StacyCarlos](https://github.com/Blackbaud-StacyCarlos)!)
