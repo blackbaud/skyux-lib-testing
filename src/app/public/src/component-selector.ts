@@ -11,6 +11,7 @@ import {
   SkyAlertFixture,
   SkyAvatarFixture,
   SkyCardFixture,
+  SkyCheckboxFixture,
   SkyErrorFixture,
   SkyLabelFixture,
   SkyListViewChecklistFixture,
@@ -96,6 +97,18 @@ export namespace SkyTestComponentSelector {
   }
 
   /**
+   * Selects a checkbox component.
+   * @param fixture The ComponentFixture where the SKY UX component resides.
+   * @param skyTestId The value of the `data-sky-id` property specified on the SKY UX component.
+   */
+  export function selectCheckbox(
+    fixture: ComponentFixture<any>,
+    skyTestId: string
+  ): SkyCheckboxFixture {
+    return new SkyCheckboxFixture(getEl(fixture, skyTestId, 'sky-checkbox'));
+  }
+
+  /**
    * Selects an error component.
    * @param fixture The ComponentFixture where the SKY UX component resides.
    * @param skyTestId The value of the `data-sky-id` property specified on the SKY UX component.
@@ -166,5 +179,4 @@ export namespace SkyTestComponentSelector {
   ): SkySearchFixture {
     return new SkySearchFixture(getEl(fixture, skyTestId, 'sky-search'));
   }
-
 }

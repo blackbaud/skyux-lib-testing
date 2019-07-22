@@ -11,7 +11,7 @@ import {
 } from '../utilities';
 
 /**
- * Allows interaction with a SKY UX avatar component.
+ * Allows interaction with a SKY UX card component.
  */
 export class SkyCardFixture {
 

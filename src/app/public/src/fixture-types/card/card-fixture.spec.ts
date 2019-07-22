@@ -53,7 +53,7 @@ class TestComponent {
 }
 //#endregion Test component
 
-describe('Action button fixture', () => {
+describe('Card fixture', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
