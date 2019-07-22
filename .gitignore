@@ -34,3 +34,6 @@ dist
 *.ngsummary.json
 yarn.lock
 package-lock.json
+
+# SKY UX temporary files
+.skypagestmp

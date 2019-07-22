@@ -9,7 +9,7 @@ import {
 
 import {
   SkyAvatarModule
-} from '@blackbaud/skyux/dist/core';
+} from '@skyux/avatar';
 
 import {
   SkyTestComponentSelector

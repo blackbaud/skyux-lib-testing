@@ -5,12 +5,12 @@ import {
 } from '@angular/core/testing';
 
 import {
-  SkyAppConfig
-} from '@blackbaud/skyux-builder/runtime';
+  SkyAppTestModule
+} from '@skyux-sdk/builder/runtime/testing/browser';
 
 import {
-  SkyAppTestModule
-} from '@blackbaud/skyux-builder/runtime/testing/browser';
+  SkyAppConfig
+} from '@skyux/config';
 
 import { expect } from './matchers';
 
