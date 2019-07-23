@@ -7,6 +7,10 @@ import {
 } from '@skyux/avatar';
 
 import {
+  SkyDatepickerModule
+} from '@skyux/datetime';
+
+import {
   SkyErrorModule
 } from '@skyux/errors';
 
@@ -47,6 +51,10 @@ import {
   SkySearchModule
 } from '@skyux/lookup';
 
+import {
+  SkyPopoverModule
+} from '@skyux/popovers';
+
 @NgModule({
   exports: [
     SkyActionButtonModule,
@@ -54,6 +62,7 @@ import {
     SkyAvatarModule,
     SkyCardModule,
     SkyCheckboxModule,
+    SkyDatepickerModule,
     SkyErrorModule,
     SkyGridModule,
     SkyIconModule,
@@ -63,6 +72,7 @@ import {
     SkyListViewChecklistModule,
     SkyListViewGridModule,
     SkyPageSummaryModule,
+    SkyPopoverModule,
     SkySearchModule
   ]
 })

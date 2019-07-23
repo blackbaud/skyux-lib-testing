@@ -39,7 +39,7 @@ import {
 })
 class TestComponent {
 
-  public checkboxType = 'info';
+  public checkboxType = 'success';
 
   public selected = false;
 
@@ -66,7 +66,7 @@ describe('Checkbox fixture', () => {
     });
   });
 
-  it('should expose the checked property', () => {
+  it('should expose the provided properties', () => {
     const fixture = TestBed.createComponent(
       TestComponent
     );
@@ -82,6 +82,28 @@ describe('Checkbox fixture', () => {
     expect(checkbox.disabled).toBe(false);
     expect(checkbox.labelText).toEqual(fixture.componentInstance.label);
     expect(checkbox.iconType).toEqual(fixture.componentInstance.icon);
+    expect(checkbox.checkboxType).toEqual(fixture.componentInstance.checkboxType);
+
+    const validCheckboxTypes = [
+      'info',
+      'success',
+      'warning',
+      'danger'
+    ];
+
+    for (const validCheckboxType of validCheckboxTypes) {
+      fixture.componentInstance.checkboxType = validCheckboxType;
+
+      fixture.detectChanges();
+
+      expect(checkbox.checkboxType).toBe(validCheckboxType);
+    }
+
+    fixture.componentInstance.checkboxType = 'invalid';
+
+    fixture.detectChanges();
+
+    expect(checkbox.checkboxType).toBeUndefined();
   });
 
   it('should provide a method for selecting the checkbox', () => {

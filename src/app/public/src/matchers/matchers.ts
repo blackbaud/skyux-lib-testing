@@ -116,11 +116,11 @@ const matchers: jasmine.CustomMatcherFactories = {
             }
 
             message.push(
-              `Expected element not to have CSS style "${styleName}: ${expectedStyle}"`
+              `Expected element to have CSS style "${styleName}: ${expectedStyle}"`
             );
           } else {
             message.push(
-              `Expected element to have CSS style "${styleName}: ${expectedStyle}"`
+              `Expected element not to have CSS style "${styleName}: ${expectedStyle}"`
             );
           }
 

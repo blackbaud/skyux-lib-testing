@@ -54,6 +54,31 @@ export class SkyCheckboxFixture {
   }
 
   /**
+   * The checkbox's type.
+   */
+  public get checkboxType(): string {
+    const classList = this.getCheckboxBoxEl().nativeElement.classList;
+
+    if (classList.contains('sky-switch-control-danger')) {
+      return 'danger';
+    }
+
+    if (classList.contains('sky-switch-control-info')) {
+      return 'info';
+    }
+
+    if (classList.contains('sky-switch-control-success')) {
+      return 'success';
+    }
+
+    if (classList.contains('sky-switch-control-warning')) {
+      return 'warning';
+    }
+
+    return undefined;
+  }
+
+  /**
    * A flag indicating whether the checkbox is currently disabled.
    */
   public get disabled(): boolean {
@@ -84,9 +109,15 @@ export class SkyCheckboxFixture {
     ).nativeElement.click();
   }
 
-  private getCheckboxInputEl() {
+  private getCheckboxInputEl(): DebugElement {
     return this.debugEl.query(
       By.css('.sky-checkbox-wrapper input')
+    );
+  }
+
+  private getCheckboxBoxEl(): DebugElement {
+    return this.debugEl.query(
+      By.css('label.sky-checkbox-wrapper span')
     );
   }
 }

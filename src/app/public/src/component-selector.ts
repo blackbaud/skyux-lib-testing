@@ -12,6 +12,7 @@ import {
   SkyAvatarFixture,
   SkyCardFixture,
   SkyCheckboxFixture,
+  SkyDatepickerFixture,
   SkyErrorFixture,
   SkyLabelFixture,
   SkyListViewChecklistFixture,
@@ -106,6 +107,18 @@ export namespace SkyTestComponentSelector {
     skyTestId: string
   ): SkyCheckboxFixture {
     return new SkyCheckboxFixture(getEl(fixture, skyTestId, 'sky-checkbox'));
+  }
+
+  /**
+   * Selects a datepicker component.
+   * @param fixture The ComponentFixture where the SKY UX component resides.
+   * @param skyTestId The value of the `data-sky-id` property specified on the SKY UX component.
+   */
+  export function selectDatepicker(
+    fixture: ComponentFixture<any>,
+    skyTestId: string
+  ): SkyDatepickerFixture {
+    return new SkyDatepickerFixture(getEl(fixture, skyTestId, 'sky-datepicker'));
   }
 
   /**
