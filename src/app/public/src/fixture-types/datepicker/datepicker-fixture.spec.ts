@@ -86,10 +86,10 @@ describe('Datepicker fixture', () => {
     );
 
     const validateVisiblity = (visibility: string) => {
-      const calendarPopoverEl: HTMLElement =
-        fixture.nativeElement.querySelector('.sky-datepicker .sky-popover-container');
+      const calendarEl: HTMLElement =
+        fixture.nativeElement.querySelector('sky-datepicker-calendar');
 
-      expect(calendarPopoverEl).toHaveStyle({ visibility });
+      expect(calendarEl).toHaveStyle({ visibility });
     };
 
     const datepicker = SkyTestComponentSelector.selectDatepicker(
