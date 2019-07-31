@@ -4,6 +4,7 @@ import {
 } from '@angular/core';
 
 import {
+  async,
   TestBed
 } from '@angular/core/testing';
 
@@ -62,7 +63,7 @@ describe('Datepicker fixture', () => {
     });
   });
 
-  it('should expose the provided properties', () => {
+  it('should expose the provided properties', async(() => {
     const fixture = TestBed.createComponent(
       TestComponent
     );
@@ -78,9 +79,9 @@ describe('Datepicker fixture', () => {
       expect(datepicker.disabled).toBe(false);
       expect(datepicker.date).toEqual(fixture.componentInstance.date);
     });
-  });
+  }));
 
-  it('should open and close the calendar when clicked', () => {
+  it('should open and close the calendar when clicked', async(() => {
     const fixture = TestBed.createComponent(
       TestComponent
     );
@@ -106,11 +107,13 @@ describe('Datepicker fixture', () => {
       validateVisiblity('visible');
 
       datepicker.clickDatepickerCalenderButtonEl();
+
+      fixture.detectChanges();
       validateVisiblity('hidden');
     });
-  });
+  }));
 
-  it('should select the day element at the given index', () => {
+  it('should select the day element at the given index', async(() => {
     const fixture = TestBed.createComponent(
       TestComponent
     );
@@ -131,9 +134,9 @@ describe('Datepicker fixture', () => {
 
       expect(datepicker.date).toEqual('01/09/2019');
     });
-  });
+  }));
 
-  it('should throw an error when trying selecting a day element that does not exist', () => {
+  it('should throw an error when trying selecting a day element that does not exist', async(() => {
     const fixture = TestBed.createComponent(
       TestComponent
     );
@@ -148,5 +151,5 @@ describe('Datepicker fixture', () => {
     fixture.whenStable().then(() => {
       expect(() => datepicker.clickDayEl(100)).toThrowError('No day exists at index 100.');
     });
-  });
+  }));
 });
