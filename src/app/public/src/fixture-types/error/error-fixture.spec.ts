@@ -10,7 +10,7 @@ import {
 
 import {
   SkyErrorModule
-} from '@blackbaud/skyux/dist/core';
+} from '@skyux/errors';
 
 import {
   SkyTestComponentSelector

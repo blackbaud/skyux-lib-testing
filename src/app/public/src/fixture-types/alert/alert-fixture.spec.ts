@@ -9,7 +9,7 @@ import {
 
 import {
   SkyAlertModule
-} from '@blackbaud/skyux/dist/core';
+} from '@skyux/indicators';
 
 import {
   SkyTestComponentSelector

@@ -11,8 +11,13 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
 import {
-  SkyListModule
-} from '@blackbaud/skyux/dist/core';
+  SkyListModule,
+  SkyListToolbarModule
+} from '@skyux/list-builder';
+
+import {
+  SkyListViewChecklistModule
+} from '@skyux/list-builder-view-checklist';
 
 import {
   SkyTestComponentSelector
@@ -69,7 +74,9 @@ describe('List view checklist fixture', () => {
         TestComponent
       ],
       imports: [
-        SkyListModule
+        SkyListModule,
+        SkyListToolbarModule,
+        SkyListViewChecklistModule
       ]
     });
   });

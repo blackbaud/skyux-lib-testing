@@ -9,7 +9,7 @@ import {
 
 import {
   SkyPageSummaryModule
-} from '@blackbaud/skyux/dist/core';
+} from '@skyux/layout';
 
 import {
   SkyTestComponentSelector

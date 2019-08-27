@@ -9,7 +9,7 @@ import {
 
 import {
   SkyCardModule
-} from '@blackbaud/skyux/dist/core';
+} from '@skyux/layout';
 
 import {
   SkyTestComponentSelector
@@ -53,7 +53,7 @@ class TestComponent {
 }
 //#endregion Test component
 
-describe('Action button fixture', () => {
+describe('Card fixture', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({

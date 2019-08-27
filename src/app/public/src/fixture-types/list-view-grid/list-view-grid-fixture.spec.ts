@@ -15,8 +15,17 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
 import {
-  SkyListModule
-} from '@blackbaud/skyux/dist/core';
+  SkyListModule,
+  SkyListToolbarModule
+} from '@skyux/list-builder';
+
+import {
+  SkyListViewGridModule
+} from '@skyux/list-builder-view-grids';
+
+import {
+  SkyGridModule
+} from '@skyux/grids';
 
 import {
   SkyTestComponentSelector
@@ -92,7 +101,10 @@ describe('List view grid fixture', () => {
         TestComponent
       ],
       imports: [
-        SkyListModule
+        SkyGridModule,
+        SkyListModule,
+        SkyListToolbarModule,
+        SkyListViewGridModule
       ]
     });
 

@@ -10,7 +10,7 @@ import {
 
 import {
   SkySearchModule
-} from '@blackbaud/skyux/dist/core';
+} from '@skyux/lookup';
 
 import {
   SkyTestComponentSelector
