@@ -26,7 +26,7 @@ import {
 } from '../../component-selector';
 //#endregion Imports
 
-const testItems: any[] = [
+const testItems = [
   { id: '1', column1: 101, column2: 'Apple', column3: 'Anne eats apples'},
   { id: '2', column1: 202, column2: 'Banana', column3: 'Ben eats bananas' },
   { id: '3', column1: 303, column2: 'Pear', column3: 'Patty eats pears' },
@@ -56,7 +56,7 @@ const testItems: any[] = [
 class TestComponent {
   public items = observableOf(testItems);
 
-  public selectedItems: any[] = [];
+  public selectedItems: typeof testItems = [];
 
   public selectMode: string = 'multiple';
 
