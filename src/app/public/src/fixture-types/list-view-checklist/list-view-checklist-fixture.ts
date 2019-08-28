@@ -70,7 +70,7 @@ export class SkyListViewChecklistFixture {
     }
   }
 
-  private getItemEl(index: number) {
+  private getItemEl(index: number): DebugElement {
     const itemEls = this.debugEl.queryAll(By.css('sky-list-view-checklist-item'));
 
     const itemEl = itemEls[index];
@@ -82,7 +82,7 @@ export class SkyListViewChecklistFixture {
     return itemEl;
   }
 
-  private getSelectEl(index: number) {
+  private getSelectEl(index: number): DebugElement {
     const itemEl = this.getItemEl(index);
 
     const checkboxEl = itemEl.query(MULTI_SELECT_EL_SELECTOR);
