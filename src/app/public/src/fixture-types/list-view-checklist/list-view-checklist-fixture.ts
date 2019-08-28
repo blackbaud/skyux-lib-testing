@@ -15,6 +15,7 @@ import {
 } from './list-view-checklist-item';
 
 const CHECKBOX_SELECTOR = By.css('.sky-checkbox-wrapper > input');
+const RADIO_SELECTOR = By.css('.sky-list-view-checklist-single-button');
 
 /**
  * Allows interaction with a SKY UX list view checklist component.
@@ -46,12 +47,10 @@ export class SkyListViewChecklistFixture {
    * @param index The item's index.
    */
   public selectItem(index: number) {
-    const itemEl = this.getItemEl(index);
+    const checkboxOrRadioEl = this.getCheckboxOrRadioEl(index);
 
-    const checkboxEl = itemEl.query(CHECKBOX_SELECTOR);
-
-    if (!checkboxEl.nativeElement.checked) {
-      checkboxEl.nativeElement.click();
+    if (!this.isChecked(checkboxOrRadioEl)) {
+      checkboxOrRadioEl.nativeElement.click();
     }
   }
 
@@ -60,12 +59,14 @@ export class SkyListViewChecklistFixture {
    * @param index The item's index.
    */
   public deselectItem(index: number) {
-    const itemEl = this.getItemEl(index);
+    const checkboxOrRadioEl = this.getCheckboxOrRadioEl(index);
 
-    const checkboxEl = itemEl.query(CHECKBOX_SELECTOR);
+    if (checkboxOrRadioEl.nativeElement.tagName === 'BUTTON') {
+      throw new Error(`Items cannot be deselected in single select mode.`);
+    }
 
-    if (checkboxEl.nativeElement.checked) {
-      checkboxEl.nativeElement.click();
+    if (this.isChecked(checkboxOrRadioEl)) {
+      checkboxOrRadioEl.nativeElement.click();
     }
   }
 
@@ -79,6 +80,29 @@ export class SkyListViewChecklistFixture {
     }
 
     return itemEl;
+  }
+
+  private getCheckboxOrRadioEl(index: number) {
+    const itemEl = this.getItemEl(index);
+
+    const checkboxEl = itemEl.query(CHECKBOX_SELECTOR);
+
+    if (checkboxEl) {
+      return checkboxEl;
+    }
+
+    // Assume the list is in single-select mode.
+    return itemEl.query(RADIO_SELECTOR);
+  }
+
+  private isChecked(checkboxOrRadioEl: DebugElement) {
+    const el = checkboxOrRadioEl.nativeElement;
+
+    if (el.tagName === 'INPUT') {
+      return el.checked;
+    }
+
+    return el.getAttribute('aria-checked') === 'true';
   }
 
 }

@@ -4,11 +4,13 @@ import {
 } from '@angular/core';
 
 import {
+  ComponentFixture,
   TestBed
 } from '@angular/core/testing';
 
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
+import {
+  of as observableOf
+} from 'rxjs';
 
 import {
   SkyListModule,
@@ -23,6 +25,16 @@ import {
   SkyTestComponentSelector
 } from '../../component-selector';
 //#endregion Imports
+
+const testItems: any[] = [
+  { id: '1', column1: 101, column2: 'Apple', column3: 'Anne eats apples'},
+  { id: '2', column1: 202, column2: 'Banana', column3: 'Ben eats bananas' },
+  { id: '3', column1: 303, column2: 'Pear', column3: 'Patty eats pears' },
+  { id: '4', column1: 404, column2: 'Grape', column3: 'George eats grapes' },
+  { id: '5', column1: 505, column2: 'Banana', column3: 'Becky eats bananas' },
+  { id: '6', column1: 606, column2: 'Lemon', column3: 'Larry eats lemons' },
+  { id: '7', column1: 707, column2: 'Strawberry', column3: 'Sally eats strawberries' }
+];
 
 //#region Test component
 @Component({
@@ -42,17 +54,9 @@ import {
   `
 })
 class TestComponent {
-  public items: Observable<Array<any>> = Observable.of([
-    { id: '1', column1: 101, column2: 'Apple', column3: 'Anne eats apples'},
-    { id: '2', column1: 202, column2: 'Banana', column3: 'Ben eats bananas' },
-    { id: '3', column1: 303, column2: 'Pear', column3: 'Patty eats pears' },
-    { id: '4', column1: 404, column2: 'Grape', column3: 'George eats grapes' },
-    { id: '5', column1: 505, column2: 'Banana', column3: 'Becky eats bananas' },
-    { id: '6', column1: 606, column2: 'Lemon', column3: 'Larry eats lemons' },
-    { id: '7', column1: 707, column2: 'Strawberry', column3: 'Sally eats strawberries' }
-  ]);
+  public items = observableOf(testItems);
 
-  public selectedItems: Array<any> = [];
+  public selectedItems: any[] = [];
 
   public selectMode: string = 'multiple';
 
@@ -67,6 +71,12 @@ class TestComponent {
 //#endregion Test component
 
 describe('List view checklist fixture', () => {
+  function getChecklistFixture(fixture: ComponentFixture<TestComponent>) {
+    return SkyTestComponentSelector.selectListViewChecklist(
+      fixture,
+      'my-list-view-checklist'
+    );
+  }
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -88,10 +98,7 @@ describe('List view checklist fixture', () => {
 
     fixture.detectChanges();
 
-    const listViewChecklist = SkyTestComponentSelector.selectListViewChecklist(
-      fixture,
-      'my-list-view-checklist'
-    );
+    const listViewChecklist = getChecklistFixture(fixture);
 
     listViewChecklist.selectItem(1);
 
@@ -110,9 +117,9 @@ describe('List view checklist fixture', () => {
 
   it('should allow an item to be selected by index', () => {
     const expectedSelectedItems = [
-      { id: '2', column1: 202, column2: 'Banana', column3: 'Ben eats bananas' },
-      { id: '4', column1: 404, column2: 'Grape', column3: 'George eats grapes' },
-      { id: '5', column1: 505, column2: 'Banana', column3: 'Becky eats bananas' }
+      testItems[1],
+      testItems[3],
+      testItems[4]
     ];
 
     const fixture = TestBed.createComponent(
@@ -149,17 +156,14 @@ describe('List view checklist fixture', () => {
 
     fixture.detectChanges();
 
-    const listViewChecklist = SkyTestComponentSelector.selectListViewChecklist(
-      fixture,
-      'my-list-view-checklist'
-    );
+    const listViewChecklist = getChecklistFixture(fixture);
 
     listViewChecklist.selectItem(1);
 
     fixture.detectChanges();
 
     expect(fixture.componentInstance.selectedItems).toEqual([
-      { id: '2', column1: 202, column2: 'Banana', column3: 'Ben eats bananas' }
+      testItems[1]
     ]);
 
     listViewChecklist.deselectItem(1);
@@ -172,6 +176,46 @@ describe('List view checklist fixture', () => {
     expect(fixture.componentInstance.selectedItems).toEqual([]);
 
     expect(() => listViewChecklist.deselectItem(100)).toThrowError('No item exists at index 100.');
+  });
+
+  it('should select an item when selectMode is single', () => {
+    const fixture = TestBed.createComponent(
+      TestComponent
+    );
+
+    fixture.componentInstance.selectMode = 'single';
+
+    fixture.detectChanges();
+
+    const listViewChecklist = getChecklistFixture(fixture);
+
+    listViewChecklist.selectItem(1);
+
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance.selectedItems).toEqual([
+      testItems[1]
+    ]);
+  });
+
+  it('should throw an error when deselecting an item and selectMode is single', () => {
+    const fixture = TestBed.createComponent(
+      TestComponent
+    );
+
+    fixture.componentInstance.selectMode = 'single';
+
+    fixture.detectChanges();
+
+    const listViewChecklist = getChecklistFixture(fixture);
+
+    listViewChecklist.selectItem(1);
+
+    fixture.detectChanges();
+
+    expect(() => listViewChecklist.deselectItem(1)).toThrowError(
+      'Items cannot be deselected in single select mode.'
+    );
   });
 
 });
