@@ -1,3 +1,9 @@
+# 2.0.0 (2019-08-28)
+
+- Migrated to SKY UX 3. [#28](https://github.com/blackbaud/skyux-lib-testing/pull/28)
+- Added checkbox and datepicker fixtures. [#28](https://github.com/blackbaud/skyux-lib-testing/pull/28)
+- Fixed error when calling `selectItem()` on a list view checklist in single-select mode. [#30](https://github.com/blackbaud/skyux-lib-testing/pull/30)
+
 # 1.2.0 (2019-04-03)
 
 - Added methods to `SkyListViewGridFixture` that return the number of rows and headers created. [#27](https://github.com/blackbaud/skyux-lib-testing/pull/27)
