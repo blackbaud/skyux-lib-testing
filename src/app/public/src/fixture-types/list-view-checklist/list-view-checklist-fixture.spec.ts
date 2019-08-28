@@ -1,4 +1,5 @@
 //#region Imports
+
 import {
   Component
 } from '@angular/core';
@@ -24,6 +25,11 @@ import {
 import {
   SkyTestComponentSelector
 } from '../../component-selector';
+
+import {
+  SkyListViewChecklistFixture
+} from './list-view-checklist-fixture';
+
 //#endregion Imports
 
 const testItems = [
@@ -71,7 +77,9 @@ class TestComponent {
 //#endregion Test component
 
 describe('List view checklist fixture', () => {
-  function getChecklistFixture(fixture: ComponentFixture<TestComponent>) {
+  function getChecklistFixture(
+    fixture: ComponentFixture<TestComponent>
+  ): SkyListViewChecklistFixture {
     return SkyTestComponentSelector.selectListViewChecklist(
       fixture,
       'my-list-view-checklist'
