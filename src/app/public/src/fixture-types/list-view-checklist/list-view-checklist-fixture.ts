@@ -14,7 +14,8 @@ import {
   SkyListViewChecklistItem
 } from './list-view-checklist-item';
 
-const CHECKBOX_SELECTOR = By.css('.sky-checkbox-wrapper > input');
+const MULTI_SELECT_EL_SELECTOR = By.css('.sky-checkbox-wrapper > input');
+const SINGLE_SELECT_EL_SELECTOR = By.css('.sky-list-view-checklist-single-button');
 
 /**
  * Allows interaction with a SKY UX list view checklist component.
@@ -37,7 +38,7 @@ export class SkyListViewChecklistFixture {
       description: SkyTestFixtureUtilities.getText(
         itemEl.query(By.css('sky-checkbox-label div:not(.sky-emphasized)'))
       ),
-      selected: itemEl.query(CHECKBOX_SELECTOR).nativeElement.checked
+      selected: itemEl.query(MULTI_SELECT_EL_SELECTOR).nativeElement.checked
     };
   }
 
@@ -46,12 +47,10 @@ export class SkyListViewChecklistFixture {
    * @param index The item's index.
    */
   public selectItem(index: number) {
-    const itemEl = this.getItemEl(index);
+    const selectEl = this.getSelectEl(index);
 
-    const checkboxEl = itemEl.query(CHECKBOX_SELECTOR);
-
-    if (!checkboxEl.nativeElement.checked) {
-      checkboxEl.nativeElement.click();
+    if (!this.isChecked(selectEl)) {
+      selectEl.nativeElement.click();
     }
   }
 
@@ -60,16 +59,18 @@ export class SkyListViewChecklistFixture {
    * @param index The item's index.
    */
   public deselectItem(index: number) {
-    const itemEl = this.getItemEl(index);
+    const selectEl = this.getSelectEl(index);
 
-    const checkboxEl = itemEl.query(CHECKBOX_SELECTOR);
+    if (selectEl.nativeElement.tagName === 'BUTTON') {
+      throw new Error(`Items cannot be deselected in single select mode.`);
+    }
 
-    if (checkboxEl.nativeElement.checked) {
-      checkboxEl.nativeElement.click();
+    if (this.isChecked(selectEl)) {
+      selectEl.nativeElement.click();
     }
   }
 
-  private getItemEl(index: number) {
+  private getItemEl(index: number): DebugElement {
     const itemEls = this.debugEl.queryAll(By.css('sky-list-view-checklist-item'));
 
     const itemEl = itemEls[index];
@@ -79,6 +80,30 @@ export class SkyListViewChecklistFixture {
     }
 
     return itemEl;
+  }
+
+  private getSelectEl(index: number): DebugElement {
+    const itemEl = this.getItemEl(index);
+
+    const checkboxEl = itemEl.query(MULTI_SELECT_EL_SELECTOR);
+
+    if (checkboxEl) {
+      return checkboxEl;
+    }
+
+    // Assume the list is in single-select mode.
+    return itemEl.query(SINGLE_SELECT_EL_SELECTOR);
+  }
+
+  private isChecked(selectEl: DebugElement): boolean {
+    const el = selectEl.nativeElement;
+
+    if (el.tagName === 'INPUT') {
+      return el.checked;
+    }
+
+    // Assume the list is in single-select mode.
+    return el.getAttribute('aria-checked') === 'true';
   }
 
 }
