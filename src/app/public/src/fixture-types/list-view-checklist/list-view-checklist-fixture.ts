@@ -14,8 +14,8 @@ import {
   SkyListViewChecklistItem
 } from './list-view-checklist-item';
 
-const CHECKBOX_SELECTOR = By.css('.sky-checkbox-wrapper > input');
-const RADIO_SELECTOR = By.css('.sky-list-view-checklist-single-button');
+const MULTI_SELECT_EL_SELECTOR = By.css('.sky-checkbox-wrapper > input');
+const SINGLE_SELECT_EL_SELECTOR = By.css('.sky-list-view-checklist-single-button');
 
 /**
  * Allows interaction with a SKY UX list view checklist component.
@@ -38,7 +38,7 @@ export class SkyListViewChecklistFixture {
       description: SkyTestFixtureUtilities.getText(
         itemEl.query(By.css('sky-checkbox-label div:not(.sky-emphasized)'))
       ),
-      selected: itemEl.query(CHECKBOX_SELECTOR).nativeElement.checked
+      selected: itemEl.query(MULTI_SELECT_EL_SELECTOR).nativeElement.checked
     };
   }
 
@@ -47,10 +47,10 @@ export class SkyListViewChecklistFixture {
    * @param index The item's index.
    */
   public selectItem(index: number) {
-    const checkboxOrRadioEl = this.getCheckboxOrRadioEl(index);
+    const selectEl = this.getSelectEl(index);
 
-    if (!this.isChecked(checkboxOrRadioEl)) {
-      checkboxOrRadioEl.nativeElement.click();
+    if (!this.isChecked(selectEl)) {
+      selectEl.nativeElement.click();
     }
   }
 
@@ -59,14 +59,14 @@ export class SkyListViewChecklistFixture {
    * @param index The item's index.
    */
   public deselectItem(index: number) {
-    const checkboxOrRadioEl = this.getCheckboxOrRadioEl(index);
+    const selectEl = this.getSelectEl(index);
 
-    if (checkboxOrRadioEl.nativeElement.tagName === 'BUTTON') {
+    if (selectEl.nativeElement.tagName === 'BUTTON') {
       throw new Error(`Items cannot be deselected in single select mode.`);
     }
 
-    if (this.isChecked(checkboxOrRadioEl)) {
-      checkboxOrRadioEl.nativeElement.click();
+    if (this.isChecked(selectEl)) {
+      selectEl.nativeElement.click();
     }
   }
 
@@ -82,26 +82,27 @@ export class SkyListViewChecklistFixture {
     return itemEl;
   }
 
-  private getCheckboxOrRadioEl(index: number) {
+  private getSelectEl(index: number) {
     const itemEl = this.getItemEl(index);
 
-    const checkboxEl = itemEl.query(CHECKBOX_SELECTOR);
+    const checkboxEl = itemEl.query(MULTI_SELECT_EL_SELECTOR);
 
     if (checkboxEl) {
       return checkboxEl;
     }
 
     // Assume the list is in single-select mode.
-    return itemEl.query(RADIO_SELECTOR);
+    return itemEl.query(SINGLE_SELECT_EL_SELECTOR);
   }
 
-  private isChecked(checkboxOrRadioEl: DebugElement) {
-    const el = checkboxOrRadioEl.nativeElement;
+  private isChecked(selectEl: DebugElement): boolean {
+    const el = selectEl.nativeElement;
 
     if (el.tagName === 'INPUT') {
       return el.checked;
     }
 
+    // Assume the list is in single-select mode.
     return el.getAttribute('aria-checked') === 'true';
   }
 
