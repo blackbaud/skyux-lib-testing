@@ -1,3 +1,7 @@
+# 2.0.1 (2019-08-29)
+
+- Fixed error when calling `getItem()` on a list view checklist in single-select mode. [#32](https://github.com/blackbaud/skyux-lib-testing/pull/32)
+
 # 2.0.0 (2019-08-28)
 
 - Migrated to SKY UX 3. [#28](https://github.com/blackbaud/skyux-lib-testing/pull/28)
