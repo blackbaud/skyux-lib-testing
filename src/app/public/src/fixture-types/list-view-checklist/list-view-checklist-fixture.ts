@@ -29,16 +29,17 @@ export class SkyListViewChecklistFixture {
    * @param index The item's index.
    */
   public getItem(index: number): SkyListViewChecklistItem {
-    const itemEl = this.getItemEl(index);
+    const selectWrapperEl = this.getSelectWrapperEl(index);
+    const selectEl = this.getSelectEl(index);
 
     return {
       label: SkyTestFixtureUtilities.getText(
-        itemEl.query(By.css('sky-checkbox-label div.sky-emphasized'))
+        selectWrapperEl.query(By.css('div.sky-emphasized'))
       ),
       description: SkyTestFixtureUtilities.getText(
-        itemEl.query(By.css('sky-checkbox-label div:not(.sky-emphasized)'))
+        selectWrapperEl.query(By.css('div:not(.sky-emphasized)'))
       ),
-      selected: itemEl.query(MULTI_SELECT_EL_SELECTOR).nativeElement.checked
+      selected: this.isChecked(selectEl)
     };
   }
 
@@ -89,6 +90,19 @@ export class SkyListViewChecklistFixture {
 
     if (checkboxEl) {
       return checkboxEl;
+    }
+
+    // Assume the list is in single-select mode.
+    return itemEl.query(SINGLE_SELECT_EL_SELECTOR);
+  }
+
+  private getSelectWrapperEl(index: number): DebugElement {
+    const itemEl = this.getItemEl(index);
+
+    const itemWrapperEl = itemEl.query(By.css('sky-checkbox-label'));
+
+    if (itemWrapperEl) {
+      return itemWrapperEl;
     }
 
     // Assume the list is in single-select mode.
