@@ -77,6 +77,8 @@ class TestComponent {
 //#endregion Test component
 
 describe('List view checklist fixture', () => {
+  const SELECT_MODE_SINGLE = 'single';
+
   function getChecklistFixture(
     fixture: ComponentFixture<TestComponent>
   ): SkyListViewChecklistFixture {
@@ -186,44 +188,74 @@ describe('List view checklist fixture', () => {
     expect(() => listViewChecklist.deselectItem(100)).toThrowError('No item exists at index 100.');
   });
 
-  it('should select an item when selectMode is single', () => {
-    const fixture = TestBed.createComponent(
-      TestComponent
-    );
+  describe('when selectMode is single', () => {
 
-    fixture.componentInstance.selectMode = 'single';
+    it('should allow an item to be retrieved by index', () => {
+      const fixture = TestBed.createComponent(
+        TestComponent
+      );
 
-    fixture.detectChanges();
+      fixture.componentInstance.selectMode = SELECT_MODE_SINGLE;
 
-    const listViewChecklist = getChecklistFixture(fixture);
+      fixture.detectChanges();
 
-    listViewChecklist.selectItem(1);
+      const listViewChecklist = getChecklistFixture(fixture);
 
-    fixture.detectChanges();
+      listViewChecklist.selectItem(1);
 
-    expect(fixture.componentInstance.selectedItems).toEqual([
-      testItems[1]
-    ]);
-  });
+      fixture.detectChanges();
 
-  it('should throw an error when deselecting an item and selectMode is single', () => {
-    const fixture = TestBed.createComponent(
-      TestComponent
-    );
+      const item = listViewChecklist.getItem(1);
 
-    fixture.componentInstance.selectMode = 'single';
+      expect(item).toEqual({
+        label: 'Banana',
+        description: 'Ben eats bananas',
+        selected: true
+      });
 
-    fixture.detectChanges();
+      expect(() => listViewChecklist.getItem(100)).toThrowError('No item exists at index 100.');
+    });
 
-    const listViewChecklist = getChecklistFixture(fixture);
+    it('should allow an item to be selected by index', () => {
+      const fixture = TestBed.createComponent(
+        TestComponent
+      );
 
-    listViewChecklist.selectItem(1);
+      fixture.componentInstance.selectMode = SELECT_MODE_SINGLE;
 
-    fixture.detectChanges();
+      fixture.detectChanges();
 
-    expect(() => listViewChecklist.deselectItem(1)).toThrowError(
-      'Items cannot be deselected in single select mode.'
-    );
+      const listViewChecklist = getChecklistFixture(fixture);
+
+      listViewChecklist.selectItem(1);
+
+      fixture.detectChanges();
+
+      expect(fixture.componentInstance.selectedItems).toEqual([
+        testItems[1]
+      ]);
+    });
+
+    it('should throw an error when deselecting an item', () => {
+      const fixture = TestBed.createComponent(
+        TestComponent
+      );
+
+      fixture.componentInstance.selectMode = SELECT_MODE_SINGLE;
+
+      fixture.detectChanges();
+
+      const listViewChecklist = getChecklistFixture(fixture);
+
+      listViewChecklist.selectItem(1);
+
+      fixture.detectChanges();
+
+      expect(() => listViewChecklist.deselectItem(1)).toThrowError(
+        'Items cannot be deselected in single select mode.'
+      );
+    });
+
   });
 
 });
