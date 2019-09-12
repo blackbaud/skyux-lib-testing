@@ -1,6 +1,12 @@
 language: node_js
 sudo: required
-dist: trusty
+dist: bionic
+
+addons:
+  chrome: stable
+
+services:
+  - xvfb
 
 git:
   depth: 10
@@ -14,11 +20,8 @@ cache:
   directories:
     - node_modules
 
-# http://blog.500tech.com/setting-up-travis-ci-to-run-tests-on-latest-google-chrome-version/
 before_install:
-  - export CHROME_BIN=/usr/bin/google-chrome
-  - export DISPLAY=:99.0
-  - bash <(curl -s https://blackbaud.github.io/skyux-travis/library-before-install.sh)
+  - npm install -g @blackbaud/skyux-cli
 
 after_script:
   - bash <(curl -s https://blackbaud.github.io/skyux-travis/library-after-script.sh)

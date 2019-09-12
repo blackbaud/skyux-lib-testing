@@ -18,7 +18,8 @@ import {
   SkyListViewChecklistFixture,
   SkyListViewGridFixture,
   SkyPageSummaryFixture,
-  SkySearchFixture
+  SkySearchFixture,
+  SkyToastFixture
 } from './fixture-types';
 
 function getEl(
@@ -191,5 +192,17 @@ export namespace SkyTestComponentSelector {
     skyTestId: string
   ): SkySearchFixture {
     return new SkySearchFixture(getEl(fixture, skyTestId, 'sky-search'));
+  }
+
+  /**
+   * Selects a toast component.
+   * @param fixture The ComponentFixture where the SKY UX component resides.
+   * @param skyTestId The value of the `data-sky-id` property specified on the SKY UX component.
+   */
+  export function selectToast(
+    fixture: ComponentFixture<any>,
+    skyTestId: string
+  ): SkyToastFixture {
+    return new SkyToastFixture(getEl(fixture, skyTestId, 'sky-toast'));
   }
 }
