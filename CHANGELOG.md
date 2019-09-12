@@ -1,6 +1,6 @@
 # 2.1.0 (2019-09-12)
 
-- Added toast component fixture. [#34](https://github.com/blackbaud/skyux-lib-testing/pull/34)
+- Added the toast component fixture. [#34](https://github.com/blackbaud/skyux-lib-testing/pull/34)
 
 # 2.0.1 (2019-08-29)
 
