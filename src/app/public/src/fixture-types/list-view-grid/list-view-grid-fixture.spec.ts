@@ -1,4 +1,3 @@
-//#region Imports
 import {
   Component
 } from '@angular/core';
@@ -10,9 +9,6 @@ import {
 import {
   TestBed
 } from '@angular/core/testing';
-
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
 
 import {
   SkyListModule,
@@ -28,13 +24,17 @@ import {
 } from '@skyux/grids';
 
 import {
+  Observable,
+  of
+} from 'rxjs';
+
+import {
   SkyTestComponentSelector
 } from '../../component-selector';
 
 import {
   SkyListViewGridFixture
 } from '.';
-//#endregion Imports
 
 const testItems = [
   { id: '1', column1: 101, column2: 'Apple', column3: 'Anne eats apples'},
@@ -88,7 +88,7 @@ const testItems = [
   `
 })
 class TestComponent {
-  public items: Observable<Array<any>> = Observable.of(testItems);
+  public items: Observable<Array<any>> = of(testItems);
 }
 //#endregion Test component
 

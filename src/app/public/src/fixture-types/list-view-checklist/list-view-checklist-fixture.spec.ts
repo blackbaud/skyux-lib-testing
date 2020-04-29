@@ -10,10 +10,6 @@ import {
 } from '@angular/core/testing';
 
 import {
-  of as observableOf
-} from 'rxjs';
-
-import {
   SkyListModule,
   SkyListToolbarModule
 } from '@skyux/list-builder';
@@ -21,6 +17,14 @@ import {
 import {
   SkyListViewChecklistModule
 } from '@skyux/list-builder-view-checklist';
+
+import {
+  of
+} from 'rxjs';
+
+import {
+  take
+} from 'rxjs/operators';
 
 import {
   SkyTestComponentSelector
@@ -60,14 +64,16 @@ const testItems = [
   `
 })
 class TestComponent {
-  public items = observableOf(testItems);
+  public items = of(testItems);
 
   public selectedItems: typeof testItems = [];
 
   public selectMode: string = 'multiple';
 
   public selectedItemsChange(selectedMap: Map<string, boolean>) {
-    this.items.take(1).subscribe((items) => {
+    this.items
+      .pipe(take(1))
+      .subscribe((items) => {
       this.selectedItems = items.filter((item) => {
         return selectedMap.get(item.id);
       });
