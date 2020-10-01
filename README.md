@@ -1,9 +1,13 @@
-# SKY UX Testing
+# SKY UX Testing (deprecated)
 
 [![npm](https://img.shields.io/npm/v/@blackbaud/skyux-lib-testing.svg)](https://www.npmjs.com/package/@blackbaud/skyux-lib-testing)
 [![status](https://travis-ci.org/blackbaud/skyux-lib-testing.svg?branch=master)](https://travis-ci.org/blackbaud/skyux-lib-testing)
 
 This library provides methods for interacting with SKY UX components during Karma unit tests.
+
+## Deprecation warning
+
+This library has been deprecated in favor of [@skyux-sdk/testing](https://github.com/blackbaud/skyux-sdk-testing).
 
 ## Installation
 
