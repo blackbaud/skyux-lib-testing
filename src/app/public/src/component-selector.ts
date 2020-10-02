@@ -1,4 +1,8 @@
 import {
+  Type
+} from '@angular/core';
+
+import {
   ComponentFixture
 } from '@angular/core/testing';
 
@@ -31,17 +35,23 @@ function getEl(
     By.css(`[data-sky-id="${skyTestId}"]`)
   );
 
-  if (!skyEl) {
-    throw new Error(`No element was found with a test ID of "${skyTestId}".`);
-  }
-
-  if (skyEl.name !== elType) {
+  if (skyEl && skyEl.name !== elType) {
     throw new Error(
       `The element with the test ID "${skyTestId}" is not a component of type ${elType}."`
     );
   }
 
   return skyEl;
+}
+
+function getFixture<T>(
+  c: Type<T>,
+  fixture: ComponentFixture<any>,
+  skyTestId: string,
+  elType: string
+): T {
+  const el = getEl(fixture, skyTestId, elType);
+  return (el) ? new c(el) : undefined;
 }
 
 /**
@@ -59,7 +69,7 @@ export namespace SkyTestComponentSelector {
     fixture: ComponentFixture<any>,
     skyTestId: string
   ): SkyActionButtonFixture {
-    return new SkyActionButtonFixture(getEl(fixture, skyTestId, 'sky-action-button'));
+    return getFixture(SkyActionButtonFixture, fixture, skyTestId, 'sky-action-button');
   }
 
   /**
@@ -71,7 +81,7 @@ export namespace SkyTestComponentSelector {
     fixture: ComponentFixture<any>,
     skyTestId: string
   ): SkyAlertFixture {
-    return new SkyAlertFixture(getEl(fixture, skyTestId, 'sky-alert'));
+    return getFixture(SkyAlertFixture, fixture, skyTestId, 'sky-alert');
   }
 
   /**
@@ -83,7 +93,7 @@ export namespace SkyTestComponentSelector {
     fixture: ComponentFixture<any>,
     skyTestId: string
   ): SkyAvatarFixture {
-    return new SkyAvatarFixture(getEl(fixture, skyTestId, 'sky-avatar'));
+    return getFixture(SkyAvatarFixture, fixture, skyTestId, 'sky-avatar');
   }
 
   /**
@@ -95,7 +105,7 @@ export namespace SkyTestComponentSelector {
     fixture: ComponentFixture<any>,
     skyTestId: string
   ): SkyCardFixture {
-    return new SkyCardFixture(getEl(fixture, skyTestId, 'sky-card'));
+    return getFixture(SkyCardFixture, fixture, skyTestId, 'sky-card');
   }
 
   /**
@@ -131,7 +141,7 @@ export namespace SkyTestComponentSelector {
     fixture: ComponentFixture<any>,
     skyTestId: string
   ): SkyErrorFixture {
-    return new SkyErrorFixture(getEl(fixture, skyTestId, 'sky-error'));
+    return getFixture(SkyErrorFixture, fixture, skyTestId, 'sky-error');
   }
 
   /**
@@ -143,7 +153,7 @@ export namespace SkyTestComponentSelector {
     fixture: ComponentFixture<any>,
     skyTestId: string
   ): SkyLabelFixture {
-    return new SkyLabelFixture(getEl(fixture, skyTestId, 'sky-label'));
+    return getFixture(SkyLabelFixture, fixture, skyTestId, 'sky-label');
   }
 
   /**
@@ -155,7 +165,7 @@ export namespace SkyTestComponentSelector {
     fixture: ComponentFixture<any>,
     skyTestId: string
   ): SkyListViewChecklistFixture {
-    return new SkyListViewChecklistFixture(getEl(fixture, skyTestId, 'sky-list-view-checklist'));
+    return getFixture(SkyListViewChecklistFixture, fixture, skyTestId, 'sky-list-view-checklist');
   }
 
   /**
@@ -167,7 +177,7 @@ export namespace SkyTestComponentSelector {
     fixture: ComponentFixture<any>,
     skyTestId: string
   ): SkyListViewGridFixture {
-    return new SkyListViewGridFixture(getEl(fixture, skyTestId, 'sky-list-view-grid'));
+    return getFixture(SkyListViewGridFixture, fixture, skyTestId, 'sky-list-view-grid');
   }
 
   /**
@@ -179,7 +189,7 @@ export namespace SkyTestComponentSelector {
     fixture: ComponentFixture<any>,
     skyTestId: string
   ): SkyPageSummaryFixture {
-    return new SkyPageSummaryFixture(getEl(fixture, skyTestId, 'sky-page-summary'));
+    return getFixture(SkyPageSummaryFixture, fixture, skyTestId, 'sky-page-summary');
   }
 
   /**
@@ -191,7 +201,7 @@ export namespace SkyTestComponentSelector {
     fixture: ComponentFixture<any>,
     skyTestId: string
   ): SkySearchFixture {
-    return new SkySearchFixture(getEl(fixture, skyTestId, 'sky-search'));
+    return getFixture(SkySearchFixture, fixture, skyTestId, 'sky-search');
   }
 
   /**

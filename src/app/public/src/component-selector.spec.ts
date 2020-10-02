@@ -49,12 +49,12 @@ describe('Component selector', () => {
     });
   });
 
-  it('should throw an error if no element is found with the specified ID', () => {
+  it('should return undefined if no element is found with the specified ID', () => {
     const fixture = TestBed.createComponent(TestComponent);
 
     expect(
-      () => SkyTestComponentSelector.selectAvatar(fixture, 'asdf')
-    ).toThrowError('No element was found with a test ID of "asdf".');
+      SkyTestComponentSelector.selectAvatar(fixture, 'asdf')
+    ).toBeUndefined();
   });
 
   it('should throw an error if the specified element is not of the expected type', () => {
